@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chart Goal chart renders correctly 1`] = `
+<div>
+  <div
+    class="GoalChart"
+    style="width: 100px; height: 100px; position: relative;"
+  >
+    <div
+      class="GoalChart__background"
+      style="background-color: rgb(255, 88, 96);"
+    />
+    <svg
+      class="progress"
+      style="position: absolute;"
+      viewBox="-50 -50 100 100"
+    >
+      <path
+        d="M3.061616997868383e-15,-50A50,50,0,1,1,-3.061616997868383e-15,50A50,50,0,1,1,3.061616997868383e-15,-50M-8.266365894244634e-15,-45A45,45,0,1,0,8.266365894244634e-15,45A45,45,0,1,0,-8.266365894244634e-15,-45Z"
+        fill="#E0E6EE"
+        fill-opacity="0.5"
+      />
+      <path
+        class="foreground"
+        d="M3.061616997868383e-15,-50L2.7554552980815448e-15,-45Z"
+        fill-opacity="1"
+      />
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`Chart Goal chart width image renders correctly 1`] = `
+<div>
+  <div
+    class="GoalChart"
+    style="width: 100px; height: 100px; position: relative;"
+  >
+    <img
+      alt="goal"
+      class="GoalChart__image"
+      src="/path/to/image"
+      style="width: 90px; height: 90px;"
+    />
+    <svg
+      class="progress"
+      style="position: absolute;"
+      viewBox="-50 -50 100 100"
+    >
+      <path
+        class="foreground"
+        d="M3.061616997868383e-15,-50L2.7554552980815448e-15,-45Z"
+        fill-opacity="1"
+      />
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`Chart Goal chart width value renders correctly 1`] = `
+<div>
+  <div
+    class="GoalChart"
+    style="width: 100px; height: 100px; position: relative;"
+  >
+    <svg
+      class="progress"
+      style="position: absolute;"
+      viewBox="-50 -50 100 100"
+    >
+      <path
+        d="M3.061616997868383e-15,-50A50,50,0,1,1,-3.061616997868383e-15,50A50,50,0,1,1,3.061616997868383e-15,-50M-8.266365894244634e-15,-45A45,45,0,1,0,8.266365894244634e-15,45A45,45,0,1,0,-8.266365894244634e-15,-45Z"
+        fill="#E0E6EE"
+        fill-opacity="0.5"
+      />
+      <text
+        class="GoalChart__progress-label"
+      >
+        0%
+      </text>
+      <path
+        class="foreground"
+        d="M3.061616997868383e-15,-50L2.7554552980815448e-15,-45Z"
+        fill-opacity="1"
+      />
+    </svg>
+  </div>
+</div>
+`;

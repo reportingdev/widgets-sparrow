@@ -1,0 +1,116 @@
+@import 'normalize.css';
+:root {
+  /* Application color palette */
+  --c-ink-med: #546070;
+  --c-ink: #2c3039;
+  --c-ink-light: #7e8b9d;
+  --c-ink-lighter: #a2abb7;
+  --c-sky-darkest: #bec4cd;
+  --c-sky-dark: #e0e6ee;
+  --c-sky: #f3f5fb;
+  --c-sky-light: #f9fafd;
+  --c-purple-dark: #4f409c;
+  --c-purple: #866cff;
+  --c-purple-light: #dbd3ff;
+  --c-purple-lighter: #f3f0ff;
+  --c-red-dark: #95343b;
+  --c-red: #ff5860;
+  --c-red-light: #ffcdcf;
+  --c-red-lighter: #ffeeef;
+  --c-green-dark: #1e7620;
+  --c-green: #33c635;
+  --c-green-light: #c2eec2;
+  --c-green-lighter: #ebf9eb;
+  --c-yellow-dark: #ab6500;
+  --c-yellow: #ffdd3e;
+  --c-yellow-light: #fff1b2;
+  --c-yellow-lighter: #fff8d8;
+  --c-pink-dark: #9647b0;
+  --c-pink: #dd56ff;
+  --c-pink-light: #f5ccff;
+  --c-pink-lighter: #fceeff;
+  --c-orange-dark: #b37214;
+  --c-orange: #ff9600;
+  --c-orange-light: #ffe0b3;
+  --c-orange-lighter: #fff5e6;
+  --c-blue-dark: #1282ae;
+  --c-blue: #00b8fc;
+  --c-blue-light: #b3eafe;
+  --c-blue-lighter: #e6f8ff;
+  --c-aqua-dark: #128c9b;
+  --c-aqua: #00c9dd;
+  --c-aqua-light: #b3eff5;
+  --c-aqua-lighter: #e6fafc;
+  --c-white: #ffffff;
+
+  /* channel colors */
+  --c-facebook: #207ff8;
+  --c-twitter: #1d9dee;
+  --c-instagram: #bc207c;
+
+  /* Fonts */
+  --c-font-family-sans-serif: 'CeraPro', system-ui, sans-serif;
+  /* Accessibility */
+  --c-outline-color: #ccf1fe;
+  /* Fonts */
+  --c-font-family-sans-serif: 'CeraPro', system-ui, sans-serif;
+  /* Component specific */
+  --c-border-radius: 5px;
+  --c-button-primary-hover: #927bff;
+  --c-button-primary-active: #7863e1;
+  --c-button-primary-inactive: #c4b4ff;
+  --c-button-danger-hover: #ff323c;
+  --c-button-danger-active: #f0000c;
+
+  /* Animation */
+  --c-transition-10ms: 0.1s;
+  --c-transition-1500ms: 1.5s; /* onboarding background */
+}
+
+/* Fonts */
+
+@font-face {
+  font-family: 'CeraPro';
+  src: url('./assets/fonts/CeraPro-Regular.woff2') format('woff2'),
+    url('./assets/fonts/CeraPro-Regular.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CeraPro';
+  src: url('./assets/fonts/CeraPro-Medium.woff2') format('woff2'),
+    url('./assets/fonts/CeraPro-Medium.woff') format('woff');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CeraPro';
+  src: url('./assets/fonts/CeraPro-Light.woff2') format('woff2'),
+    url('./assets/fonts/CeraPro-Light.woff') format('woff');
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CeraPro';
+  src: url('./assets/fonts/CeraPro-Bold.woff2') format('woff2'),
+    url('./assets/fonts/CeraPro-Bold.woff') format('woff');
+  font-weight: 600;
+  font-display: swap;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 24px;
+  font-family: var(--c-font-family-sans-serif);
+}
+
+.Icon--customSize {
+  width: 60px;
+  height: 60px;
+}

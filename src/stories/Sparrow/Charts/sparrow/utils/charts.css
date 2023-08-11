@@ -1,0 +1,20 @@
+.Sparrow__chartContainer {
+  width: 100%;
+  height: 100%;
+}
+.Sparrow__chartContainer > div > svg {
+  width: auto !important;
+  height: auto !important;
+}
+
+.sparrow-negative {
+  color: var(--c-red);
+}
+
+.sparrow-positive {
+  color: var(--c-green);
+}
+
+.sparrow[data-sparrow-chart] {
+  overflow: visible !important;
+}

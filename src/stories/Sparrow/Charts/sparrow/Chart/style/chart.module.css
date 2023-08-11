@@ -1,0 +1,516 @@
+.ChartWrapper {
+  width: 50%;
+  margin: 100px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loaderCircle {
+  stroke-linecap: round;
+  animation: IconDash 1.5s ease-in-out infinite,
+    IconDashRotate 2s linear infinite;
+  position: absolute;
+}
+
+@keyframes IconDash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+@keyframes IconDashRotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.tooltipWrap {
+  transition: left 0.5s, top 0.5s, opacity 0.5s;
+}
+
+.tooltip {
+  background: #2c3039;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  font-family: 'CeraPro', system-ui, sans-serif;
+}
+
+.tooltipTitle {
+  color: #e0e6ee;
+  margin-bottom: 4px;
+}
+
+.tooltipRow {
+  display: flex;
+  align-items: center;
+}
+
+.tooltipRowColor {
+  border-radius: 3px;
+  width: 12px;
+  height: 6px;
+  margin-right: 7px;
+}
+
+.tooltipRowLabel {
+  color: #bec4cd;
+  margin-right: 12px;
+  white-space: nowrap;
+}
+
+.tooltipRowValue {
+  font-size: 13px;
+  line-height: 16px;
+  margin-left: auto;
+  color: #ffffff;
+}
+
+.polarAxisText {
+  font-size: 13px;
+  line-height: 16px;
+  fill: #bec4cd;
+  text-anchor: middle;
+}
+
+.ChartContainer {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  transition: width 2s, height 2s;
+}
+
+.Tip {
+  position: absolute;
+  border-radius: 5px;
+  transition: opacity 0.5s, top 0.5s, left 0.5s;
+  transform: translate(-50%, -100%);
+  z-index: 1;
+  overflow: hidden;
+}
+
+.Tip--area {
+  padding: 11px 16px !important;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.19);
+  transition: opacity 0.5s, top 0.3s, left 0.3s;
+}
+
+.Tip--area::before {
+  --size: 7px;
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-left: var(--size) solid transparent;
+  border-top: var(--size) solid #ffffff;
+  border-right: var(--size) solid transparent;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(var(--size) * -1);
+}
+
+.Tip--area::after {
+  --size: 6px;
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-left: var(--size) solid transparent;
+  border-top: var(--size) solid rgba(0, 0, 0, 0.7);
+  border-right: var(--size) solid transparent;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(var(--size) * -1);
+}
+
+.TipComparison {
+  top: 10px;
+  background: #2c3039;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.185834);
+  padding: 9px 15px !important;
+  border-radius: 8px;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.TipComparison__row {
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  align-items: center;
+  column-gap: 7px;
+  margin-bottom: 2px;
+}
+
+.TipComparison__badge {
+  width: 12px;
+  height: 6px;
+  border-radius: 3px;
+}
+
+.TipComparison__value {
+  font-size: 13px !important;
+  line-height: 16px !important;
+}
+
+.TipComparison__title {
+  font-size: 11px !important;
+  line-height: 14px !important;
+  color: #a1a5bd;
+}
+
+.Tip__date {
+  font-size: 11px !important;
+  line-height: 13px !important;
+  opacity: 0.6;
+}
+
+.Tip__value {
+  font-size: 15px !important;
+  line-height: 18px !important;
+}
+
+.Tip--donut {
+  transition: none;
+}
+
+.comparison-dot {
+  position: absolute;
+  z-index: 1;
+  width: 15px;
+  height: 15px;
+  transition: opacity 0.3s, transform 0.3s, left 0.3s, top 0.3s;
+  border: 3px solid #ffffff;
+  box-shadow: 0px 2px 6px rgba(74, 55, 159, 0.2);
+  border-radius: 50%;
+  box-sizing: border-box;
+  transform: translate(-50%, 50%);
+}
+
+.curve-dot {
+  position: absolute;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  border: 4px solid #ffffff;
+  border-radius: 50%;
+  box-sizing: border-box;
+  transform: translate(-50%, 5px);
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.16);
+}
+
+.curveLine {
+  position: absolute;
+  z-index: 1;
+  border-right: 2px dashed transparent;
+  transform: translate(-1px, 25px);
+}
+
+.curveXAxis text {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 24px;
+}
+
+.vertical-line {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  background-color: #d6dce4;
+  transition: opacity 0.5s, left 0.3s;
+}
+
+.date-axis-tip {
+  position: absolute;
+  bottom: 0;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  transform: translateX(-50%);
+  transition: opacity 0.5s, left 0.3s;
+  white-space: nowrap;
+  background-color: #ffffff;
+  padding: 0 10px;
+}
+
+.line {
+  fill: none;
+  stroke-width: 4px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.area,
+.line {
+  transform: translateY(-1px);
+}
+
+.dot {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.axis path {
+  stroke-width: 1px;
+  stroke: #eef1f6;
+}
+
+.axis line {
+  stroke: transparent;
+  stroke-width: 0.5px;
+}
+.y-axis,
+.x-axis {
+  font: inherit;
+}
+
+.axis text {
+  fill: #7e8b9d;
+  font-size: 11px;
+  font-family: 'CeraPro', system-ui, sans-serif;
+}
+
+rect {
+  transition: opacity 0.5s ease;
+}
+
+rect:hover,
+rect.hovered {
+  opacity: 1;
+}
+
+.barsGroup {
+  transition: opacity 0.5s;
+}
+
+.Donut {
+  transition: width 2s, height 2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Donut path {
+  transition: opacity 0.5s;
+}
+
+.Donut path.hovered {
+  opacity: 1;
+}
+
+.donutArc:hover {
+  opacity: 1;
+}
+
+.centerLabelGroup {
+  text-anchor: middle;
+  alignment-baseline: middle;
+}
+
+.donutLabel {
+  font-family: 'CeraPro', system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 16px;
+  fill: #7e8b9d;
+}
+
+.donutValue {
+  font-family: 'CeraPro', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  fill: #546070;
+}
+
+.Donut__centerLabel {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.Donut__centerLabel-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.Donut__centerLabel-item:not(:last-of-type) {
+  margin-right: 30px;
+}
+
+.Donut__centerLabel-value {
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.Donut__centerLabel-value--male {
+  color: #1d9dee;
+}
+
+.Donut__centerLabel-value--female {
+  color: #c12382;
+}
+
+.Donut__centerLabel-title {
+  font-size: 12px;
+  color: #7e8b9d;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.HorizontalBar {
+  width: 100%;
+  padding: 24px;
+}
+
+.HorizontalBar__line {
+  width: 100%;
+  height: 18px;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.HorizontalBar__percent {
+  display: inline-block;
+  font-size: 0;
+  height: 100%;
+  width: 0;
+  transition: width 0.5s;
+}
+
+.HorizontalBar__legend {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 0 50px;
+}
+
+.HorizontalBar__legend-item {
+  display: flex;
+  align-items: center;
+}
+
+.HorizontalBar__legend-value {
+  font-size: 24px;
+  line-height: 48px;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.HorizontalBar__legend-value--positive {
+  color: #33c635;
+}
+.HorizontalBar__legend-value--neutral {
+  color: #7e8b9d;
+}
+.HorizontalBar__legend-value--negative {
+  color: #ff5860;
+}
+
+.HorizontalBar__legend-label {
+  font-size: 12px;
+  line-height: 24px;
+  color: #7e8b9d;
+  text-transform: uppercase;
+}
+
+.HeatMap text {
+  fill: #7e8b9d;
+  font-size: 11px;
+  text-transform: uppercase;
+  transition: fill 0.3s, font-weight 0.3s;
+}
+
+.HeatMap text.hovered {
+  font-weight: 700;
+  fill: #866cff;
+}
+
+.HeatMap rect {
+  transition: transform 0.5s;
+  transform-origin: 2% 5%;
+}
+
+.HeatMap rect:hover {
+  transform: scale(1.1);
+}
+
+.GoalChart {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.GoalChart__background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.GoalChart__image {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.GoalChart__progress-label {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 36px;
+  dominant-baseline: central;
+}
+
+.axis-labels {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  fill: #7e8b9d;
+  text-transform: capitalize;
+  cursor: default;
+}
+
+.axis-value {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  cursor: default;
+}
+
+.legend-label {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.dayLabel {
+  text-anchor: end;
+}
+
+.timeLabel {
+  text-anchor: middle;
+}
+
+.post-item {
+  font: inherit;
+}

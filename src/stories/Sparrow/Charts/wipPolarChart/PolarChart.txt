@@ -1,0 +1,111 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { widgetDataGenerator } from '../../../utils/generators';
+import LabelsWrap from "../sparrow/Chart/label-wrap/label-wrap";
+//import s from '../sparrow/Chart/style/chart.module.css'
+
+
+
+/**
+ * Primary UI component for user interaction
+ */
+export const PolarChart = ({
+  data,
+  loading,
+  onClick,
+  title,
+  titleAlignment,
+  animationDuration,
+  showXAxis,
+  showTooltip,
+  showLegend,
+  labelPosition,
+  labelAlignment
+}: Widget) => {
+
+  // labels comes from the passed datasets
+
+
+
+  // datasets comes from the passes datasets field
+  const datasets = data?.datasets.map(ds => ({
+    label: ds.label,
+    data: ds.data,
+    backgroundColor: ds?.backgroundColor,
+    opacity: 0.1,
+  }));
+
+  // grab each label from the datasets
+  const labels = datasets.map(({label})=>label);
+
+  const chartData = {
+    labels,
+    datasets
+  }
+
+  const config = {
+    chart: {
+      aspectRatio: 1,
+      barOpacity: 0.7
+    },
+    tooltip: {
+      hide: false
+    },
+    animation: {
+      duration: 1000
+    },
+    scales: {
+      min: 0
+    },
+    loader: {
+      show: false,
+      label: '',
+      color: '#6B7280'
+    }
+  }
+
+  const chartSettings = {
+    type: 'polar',
+    data: chartData,
+    config
+  }
+
+  return (
+    <LabelsWrap
+      title={title}
+      chartSettings={chartSettings}
+    />
+  );
+};
+
+PolarChart.propTypes = {
+  data: PropTypes.object,
+  loading: PropTypes.bool,
+  title: PropTypes.string,
+  onClick: PropTypes.func,
+  animationDuration: PropTypes.number,
+  showTooltip: PropTypes.bool,
+  showXAxis: PropTypes.bool,
+  showLegend: PropTypes.bool,
+  labelPosition: PropTypes.string,
+  labelAlignment: PropTypes.string
+};
+
+const chartSampleData = widgetDataGenerator(1, true, false);
+
+PolarChart.defaultProps = {
+  data: chartSampleData,
+  loading: false,
+  onClick: ()=>{},
+  title: 'My Chart',
+  titleAlignment: 'center',
+  animationDuration: 1000,
+  showXAxis: true,
+  showTooltip: true,
+  showLegend: true,
+  labelPosition: 'bottom',
+  labelAlignment: 'center'
+};
+
+
+

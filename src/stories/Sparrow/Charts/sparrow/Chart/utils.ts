@@ -169,7 +169,7 @@ export const createScaleLinear = (
 export const getMaxDatasetValue = (
   datasets: Dataset[],
   stubValue: number = 500
-): any => {
+): number => {
   const max = d3.max(datasets, (set) => d3.max(set.data)) ?? stubValue
 
   return max > 0 ? max : stubValue
@@ -181,7 +181,7 @@ export const getMaxStackedValue = (
   const max =
     d3.max(series, (d: any) => d3.max(d, (d1: any) => d1[1])) ?? stubValue
 
-  return max > 0 ? max : stubValue
+  return (max as number) > 0 ? max : stubValue
 }
 
 export const getMinDatasetValue = (
@@ -708,7 +708,11 @@ export const addBarTip = ({
         0
       ) -
       y(0) * (barDataSets.length - 1)
-    const topPos = stacked === true ? stackedPosition : groupPosition
+    
+    let topPos = groupPosition;
+    if(stacked === true && barDataSets.length >0) {
+      topPos = stackedPosition;
+    }
 
     const tooltipSets = datasets.map(({ label, data, backgroundColor }) => ({
       label: formatLabel(label),

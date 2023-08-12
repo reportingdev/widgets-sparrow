@@ -21,6 +21,7 @@ const LabelsWrap: FC<Props> = ({
  
   const [disabledLabels, setDisabledLabels] = useState<string[]>([])
   const { type, data: rawData, config } = chartSettings
+
   const { datasets } = rawData
   const isLoading = config?.loader?.show ?? false;
   const showLabels = !config?.labels?.hide ?? true

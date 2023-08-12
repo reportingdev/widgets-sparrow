@@ -158,7 +158,7 @@ AreaChart.defaultProps = {
   keepTooltipInsideContainer: false,
   showLabels: true,
   axisColor: "#7E8B9D",
-  labelPosition: 'top',
+  labelPosition: 'bottom',
   labelAlignment: 'right'
 };
 

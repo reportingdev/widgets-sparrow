@@ -16,6 +16,9 @@ module.exports = {
   "core": {
     "builder": "@storybook/builder-webpack5"
   },
+  features: {
+    update: false,
+  },
   webpackFinal: async (config, { configType }) => {
     config.resolve.plugins = [new TsconfigPathsPlugin()];
     

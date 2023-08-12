@@ -689,7 +689,6 @@ export const addBarTip = ({
       showInsideContainer && isTipHitsRightEdge ? maxTipLeftPost : tipLeftPos
     const mostYValue = d3.max(datasets, ({ data }) => data[i])
     const groupPosition = y(mostYValue >= 0 ? mostYValue : 0)
-
     verticalLine.style('left', leftPos)
 
     dots.each(function (_, j) {
@@ -701,6 +700,7 @@ export const addBarTip = ({
     })
     // line datasets should not effect tooltip height
     const barDataSets = datasets.filter(({ type }) => type !== 'line')
+    const LineDatasets = datasets.filter(({ type }) => type === 'line')
 
     const stackedPosition =
       barDataSets.reduce(
@@ -711,9 +711,13 @@ export const addBarTip = ({
     
     let topPos = groupPosition;
     if(stacked === true && barDataSets.length >0) {
-      topPos = stackedPosition;
+      if(LineDatasets.length>0) {
+        topPos = Math.min(stackedPosition,groupPosition);
+      } else {
+        topPos = stackedPosition;
+      }
     }
-
+    
     const tooltipSets = datasets.map(({ label, data, backgroundColor }) => ({
       label: formatLabel(label),
       value: formatValue?.(data[i]) ?? data[i],

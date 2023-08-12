@@ -1,13 +1,13 @@
 import React from "react";
 import { widgetDataGenerator } from "../../../utils/generators";
-import { LineChart } from "./LineChart";
+import { LineBarChart } from "./LineBarChart";
 import { DATE_FORMAT_OPTIONS } from "../sparrow/Chart/constants";
 
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Sparrow/Charts/LineChart",
-  component: LineChart,
+  title: "Sparrow/Charts/LineBarChart",
+  component: LineBarChart,
   widgetConfig: {
     data: true,
     changeRate: false,
@@ -33,6 +33,9 @@ export default {
         category: 'Chart Title'
       }
     },
+    stackBars: { control: 'boolean', description: 'Whether to stack bars or not', table: {category: "Data Settings"} },
+    numberOfLines: { control: 'number', description: 'the number of datasets that should be visualized as lines. starts from the end.', table: {category: "Data Settings"} },
+    barOpacity: { control: 'number', description: 'Opacity of the bars', table: {category: "Data Settings"} },
     lineOpacity: { control: 'number', description: 'Opacity of the lines', table: {category: "Data Settings"} },
     showXAxis: { control: 'boolean', description: 'Whether to show the X Axis or not', table: {category: "Axis Settings"}  },
     XAxisFontSize: { control: 'text', description: 'Font size for the X Axis', table: {category: "Axis Settings"}  },
@@ -55,12 +58,12 @@ export default {
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args: any) => (<div style={{width: '70%', height: '400px', border: '2px solid grey'}}><LineChart {...args} /></div>);
+const Template = (args: any) => (<div style={{width: '70%', height: '400px', border: '2px solid grey'}}><LineBarChart {...args} /></div>);
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
-const dummyData = widgetDataGenerator(2, true, false);
+const dummyData = widgetDataGenerator(3, true, false);
 Primary.args = {
   data: dummyData,
   loading: false,
@@ -68,6 +71,9 @@ Primary.args = {
   title: "My new chart",
   titleAlignment: 'left',
   lineOpacity: 0.7,
+  barOpacity: 0.7,
+  stackBars: true,
+  numberOfLines: 1,
   showXAxis: true,
   XAxisFontSize: '11px',
   axisColor: '#7E8B9D',

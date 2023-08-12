@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { widgetDataGenerator } from '../../../utils/generators';
 import LabelsWrap from "../sparrow/Chart/label-wrap/label-wrap";
 import { formatDateStringGenerator } from '../sparrow/utils';
+//import { getMaxDatasetValue } from '../sparrow/Chart/utils';
 //import s from '../sparrow/Chart/style/chart.module.css'
 
 
@@ -10,21 +11,23 @@ import { formatDateStringGenerator } from '../sparrow/utils';
 /**
  * Primary UI component for user interaction
  */
-export const BarChart = ({
+export const LineBarChart = ({
   data,
   loading,
   title,
   titleAlignment,
   onBarClick,
-  stackBars,
-  barOpacity,
+  numberOfLines,
   lineOpacity,
+  barOpacity,
+  stackBars,
   showXAxis,
   XAxisFontSize,
   XAxisLabelSpace,
   showYAxis,
   YAxisFontSize,
   YAxisLabelSpace,
+  yAxisPaddingPercentage,
   animationDuration,
   animationStepDelay,
   showTooltip,
@@ -42,14 +45,26 @@ export const BarChart = ({
   const labels = rawLabels//.map(formatDateStringGenerator('US Short Month & Day') as any);
 
   // datasets comes from the passes datasets field
-  const datasets = data?.datasets.map(ds => ({
+  const datasets:any = data?.datasets.map(ds => ({
     label: ds.label,
     data: ds.data,
     backgroundColor: ds?.backgroundColor,
     //color: ds?.backgroundColor,
     opacity: barOpacity,
-    //type: 'bar'
-  }))
+    type: 'bar'
+  }));
+
+  // calculate the number of datasets that should be rendered as lines
+  const numLines = Math.min(Math.abs(numberOfLines),datasets?.length ?? 0)
+  for(let i=0;i<numLines;i++) {
+    if(datasets?.length>0) {
+      datasets[datasets.length-1-i].type = 'line';
+    }
+  }
+
+  //let maxDatasetValue = getMaxDatasetValue(datasets)
+
+  //const yMaxValue = maxDatasetValue*(1+Math.min(Math.abs(yAxisPaddingPercentage),1));
   
   const chartData = {
     labels,
@@ -83,6 +98,7 @@ export const BarChart = ({
           'font-size': YAxisFontSize,
           color: axisColor
         },
+        //max: yMaxValue,
         labelSpace: YAxisLabelSpace,
       }
     },
@@ -121,13 +137,14 @@ export const BarChart = ({
   );
 };
 
-BarChart.propTypes = {
+LineBarChart.propTypes = {
   data: PropTypes.object,
   loading: PropTypes.bool,
   title: PropTypes.string,
   titleAlignment: PropTypes.string,
   onClick: PropTypes.func,
   stackBars: PropTypes.bool,
+  numberOfLines: PropTypes.number,
   barOpacity: PropTypes.number,
   lineOpacity: PropTypes.number,
   showXAxis: PropTypes.bool,
@@ -136,6 +153,7 @@ BarChart.propTypes = {
   showYAxis: PropTypes.bool,
   YAxisFontSize: PropTypes.string,
   YAxisLabelSpace: PropTypes.number,
+  yAxisPaddingPercentage: PropTypes.number,
   axisColor: PropTypes.string,
   animationDuration: PropTypes.number,
   animationStepDelay: PropTypes.number,
@@ -152,13 +170,14 @@ BarChart.propTypes = {
 
 const chartSampleData = widgetDataGenerator(1, true, false);
 
-BarChart.defaultProps = {
+LineBarChart.defaultProps = {
   data: chartSampleData,
   loading: false,
   onClick: () => { },
   title: "My Chart",
   titleAlignment: 'left',
   stackBars: false,
+  numberOfLines: 1,
   barOpacity: 0.7,
   lineOpacity: 0.7,
   showXAxis: true,
@@ -167,6 +186,7 @@ BarChart.defaultProps = {
   showYAxis: true,
   YAxisFontSize: '11px',
   YAxisLabelSpace: 40,
+  yAxisPaddingPercentage: 0.2,
   animationDuration: 2000,
   animationStepDelay: 50,
   showTooltip: true,
@@ -175,7 +195,7 @@ BarChart.defaultProps = {
   keepTooltipInsideContainer: false,
   showLegend: true,
   axisColor: "#7E8B9D",
-  labelPosition: 'bottom',
+  labelPosition: 'top',
   labelAlignment: 'right'
 };
 

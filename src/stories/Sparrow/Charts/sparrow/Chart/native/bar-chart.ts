@@ -53,7 +53,6 @@ class BarChart {
     const height = aspectRatio === 'auto' ? containerHeight : width / aspectRatio
       const container = d3.select(ref)
     container.classed(s.ChartContainer, true)
-
     if (width === 0 || width == null) {
       return
     }
@@ -65,7 +64,7 @@ class BarChart {
 
     svg.attr('width', width).attr('height', height) // TODO height can be forced here (passed from props all the way down)
 
-    const barDatasets = datasets.filter(({ type }: any) => type == null)
+    const barDatasets = datasets.filter(({ type }: any) => type == null || type==='bar')
     const simpleLabels = config?.scales?.x?.formatLabel ? labels.map(config.scales.x.formatLabel) : labels; 
     const x0 = createScaleBand(simpleLabels, [margin.left, width - margin.right])
     const x1 = createScaleBand(
@@ -98,9 +97,8 @@ class BarChart {
       config.scales.y.max ??
       (chart.stacked !== false
         ? getMaxStackedValue(series)
-        : getMaxDatasetValue(datasets))
+        : getMaxDatasetValue(datasets));
     const minY = config.scales.y.min ?? getMinDatasetValue(datasets)
-
     const marginTop = margin.top
 
     const y = createScaleLinear(

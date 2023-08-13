@@ -14,7 +14,7 @@ interface KPIProps {
   growthPercentage?: string;
 }
 
-const KPIMetric: React.FC<KPIProps> = ({ alignment = 'left', icon, iconFormat, metricLabel, metricValue, iconColor = "#5E52ED", growthPercentage }) => {
+const KPIMetric: React.FC<KPIProps> = ({ alignment = 'left', icon, iconFormat, metricLabel, metricValue, iconColor = "#5E52ED", growthPercentage,labelColor,metricColor }) => {
   const getGrowthColor = () => {
     if (growthPercentage?.charAt(0) === '+') return '#498656';
     if (growthPercentage?.charAt(0) === '-') return '#FF5860';
@@ -64,8 +64,8 @@ const KPIMetric: React.FC<KPIProps> = ({ alignment = 'left', icon, iconFormat, m
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         {IconCircle}
-        <p className='KPI__Label' style={{ color: '#7E8B9D', margin: '2px 0 0 0' }}>{metricLabel}</p>
-        <p className='KPI__Metric' style={{ color: '#2C3039', margin: '6px 0' }}>{metricValue}</p>
+        <p className='KPI__Label' style={{ color: labelColor, margin: '2px 0 0 0' }}>{metricLabel}</p>
+        <p className='KPI__Metric' style={{ color: metricColor, margin: '6px 0' }}>{metricValue}</p>
         {
           growthPercentage && (
             <p className='KPI__Delta' style={{ color: getGrowthColor(), margin: '0' }}>
@@ -81,9 +81,9 @@ const KPIMetric: React.FC<KPIProps> = ({ alignment = 'left', icon, iconFormat, m
     <div style={{ display: 'flex', alignItems: 'center' }}>
       {IconCircle}
       <div style={{ marginRight: 8 }}>
-        <p className='KPI__Label' style={{ color: '#7E8B9D', margin: '0' }}>{metricLabel}</p>
+        <p className='KPI__Label' style={{ color: labelColor, margin: '0' }}>{metricLabel}</p>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <p className='KPI__Metric' style={{ color: '#2C3039', margin: '2px 8px 0 0' }}>{metricValue}</p>
+          <p className='KPI__Metric' style={{ color: metricColor, margin: '2px 8px 0 0' }}>{metricValue}</p>
           <p className="KPI__Delta" style={{ fontSize: 12, color: getGrowthColor(), margin: '2px 0 0 0' }}>
             {growthPercentage}
           </p>

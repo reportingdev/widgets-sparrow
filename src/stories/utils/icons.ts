@@ -1,5 +1,5 @@
-import {lookupIcon} from "heroicons-lookup";
-
+import { IconFormat, lookupIcon } from "heroicons-lookup";
+import {ChevronUpIcon} from '@heroicons/react/solid'
 
 const ICON_KEYS = [
   "None",
@@ -229,7 +229,27 @@ const ICON_KEYS = [
   "ZoomOut"
 ];
 
+const getIcon = (icon: string, format:IconFormat = 'solid'): any => {
+  let MyIcon;
+  const formats = ['outline', 'solid'];
+  try {
+    const myFormat = formats.includes(format) ? format : 'solid';
+    MyIcon = lookupIcon(`${icon}Icon` as any, myFormat as IconFormat);  // Changed 'outline' to format
+  } catch (err) { 
+    console.warn(`Icon lookup failed for ${icon}. Defaulting to ChevronUpIcon.`);
+  }
+  if(!MyIcon) {
+    MyIcon = ChevronUpIcon;
+  }
+
+  // Return a component that conforms to the HeroIcon type
+  return MyIcon
+}
+
+
 export {
   ICON_KEYS,
-  lookupIcon
+  lookupIcon,
+  IconFormat,
+  getIcon
 }

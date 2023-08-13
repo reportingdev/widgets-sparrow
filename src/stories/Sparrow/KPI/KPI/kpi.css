@@ -1,0 +1,26 @@
+.KPI__Label {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.KPI__Metric {
+  font-size: 20px;
+  font-weight: 700;
+  /* line-height: 32px; */
+}
+
+.KPI__Delta {
+  font-weight: 500;
+  font-size: 12px;
+  /* line-height: 24px; */
+}
+
+.KPI__IconCircle {
+  opacity: 0.5;
+}
+
+.KPI__Icon {
+  height: 16px;
+  width: 16px;
+}

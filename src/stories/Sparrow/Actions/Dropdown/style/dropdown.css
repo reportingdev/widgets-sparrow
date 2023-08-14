@@ -1,0 +1,85 @@
+.Dropdown__optionLabel {
+    color: #2c3039;
+    font-family: 'CeraPro', system-ui, sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 24px;
+    vertical-align: middle;
+  }
+  
+  .ReactSelect--is-disabled .Dropdown__optionLabel {
+    color: #a2abb7;
+  }
+  
+  .Dropdown__label {
+    display: block;
+    font-size: 15px;
+    line-height: inherit;
+    color: #a2abb7;
+    padding-bottom: 6px;
+    position: relative;
+  }
+  
+  .Dropdown__optionContainer {
+    cursor: pointer;
+  }
+  
+  .Dropdown__optionImage {
+    vertical-align: middle;
+    width: 25px;
+    margin-right: 6px;
+  }
+  
+  .Dropdown__selectedOptionImage {
+    vertical-align: middle;
+    width: 20px;
+    margin-right: 6px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .Dropdown__loading-label {
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .Dropdown__loading-placeholder {
+    animation: wave 1.2s infinite linear forwards;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  }
+  
+  .Dropdown__loading-placeholder--round {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-size: 80px 104px;
+  }
+  
+  .Dropdown__loading-placeholder--rect {
+    width: 100px;
+    height: 15px;
+    background-size: 400px 104px;
+    animation-delay: 0.2s;
+  }
+  
+  @keyframes wave {
+    0% {
+      background-position: 60% 0;
+    }
+  
+    30% {
+      background-position: 60% 0;
+    }
+  
+    100% {
+      background-position: -60% 0;
+    }
+  }
+  
+  .ReactSelect--isLoading {
+    pointer-events: none;
+  }
+  

@@ -202,7 +202,6 @@ export default class DateRangePicker extends React.Component {
       }
       else {
         newColor = color.replace(/[^,]+(?=\))/, 0.2)
-        console.log(newColor)
         return newColor
       }
     } 

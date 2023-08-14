@@ -41,7 +41,6 @@ const KPIMetric: React.FC<KPIProps> = ({ alignment = 'left', icon, iconFormat, m
   };
 
   const HeroIcon = icon ? getIcon(icon,iconFormat) : null;
-  console.log(HeroIcon)
   const IconCircle = icon ? (
     <div
       style={{

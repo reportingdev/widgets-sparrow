@@ -151,25 +151,20 @@ const getRandomColor = (): string => {
 
 const actionDataGenerator = () => {
 
-  const labels = ['Facebook', 'Instagram', 'Twitter'];
-  const values = ['facebook', 'instagram', 'twitter'];
-
-  const createDatasets = () => {
-    const result: any[] = [];
-    labels.forEach((label, i) => {
-      result.push({
-        label,
-        data: [values[i]],
+  const defaultOptionData:WidgetData = {
+    datasets: [{
+      label: 'labels',
+      data: ['Facebook','Instagram','Twitter'],
+      dataType: 'string',
+      },
+      {
+        label: 'values',
+        data: ['facebook','instagram','twitter'],
         dataType: 'string',
-      })
-    })
-    return result;
-  }
-
-  return {
-    datasets: createDatasets(),
-    dimension: null
-  }
+      }
+    ]
+  };
+  return defaultOptionData;
 }
 
 export {

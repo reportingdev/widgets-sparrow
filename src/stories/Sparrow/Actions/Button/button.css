@@ -1,0 +1,137 @@
+/* Default Button */
+.Button--Default {
+    box-sizing: border-box;
+    font-family: 'CeraPro', system-ui, sans-serif;
+    padding: 12px 24px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 24px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    min-width: 155px;
+    height: 48px;
+    position: relative;
+  }
+  
+  .Button__Content--hidden {
+    visibility: hidden;
+  }
+  
+  .Button--Primary {
+    background-color: #866cff;
+    color: #ffffff;
+  }
+  
+  /* Hover State */
+  .Button--Primary:hover:enabled {
+    background-color: #927bff;
+  }
+  
+  /* Active State */
+  .Button--Primary:active:enabled {
+    background-color: #7863e1;
+  }
+  
+  /* Focused State */
+  .Button--Default:focus {
+    outline: 3px solid #ccf1fe;
+    border: 1px solid #f3f0ff;
+  }
+  
+  /* Inactive  State */
+  .Button--Primary:disabled {
+    opacity: 0.5;
+    cursor: no-drop;
+  }
+  
+  /* Secondary */
+  .Button--Secondary {
+    background: #ffffff;
+    color: #7e8b9d;
+    border: 1px solid #e0e6ee;
+  }
+  
+  /* Secondary Hover */
+  .Button--Secondary:hover {
+    background: #f3f5fb;
+  }
+  
+  /* Secondary Active */
+  .Button--Secondary:active {
+    background: #e0e6ee;
+  }
+  
+  /* Secondary Inactive*/
+  .Button--Secondary:disabled {
+    background: #f3f5fb;
+    opacity: 0.5;
+    cursor: no-drop;
+  }
+  
+  /* Loading State */
+  .Button__Loading--default {
+    pointer-events: none;
+  }
+  
+  /* Primary Loading Background */
+  .Button--Primary.Button__Loading--default {
+    background: #dbd3ff;
+  }
+  
+  /* Secondary Loading Background */
+  .Button--Secondary.Button__Loading--default {
+    background: #f3f5fb;
+  }
+  
+  
+  .Button__Loading__Container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+  }
+  
+  .Button__Loading__Spinner {
+    animation: ButtonDashRotate 2s linear infinite;
+    width: 24px;
+    opacity: 1;
+  }
+  
+  .Button__Loading__Spinner__Path {
+    stroke: #927bff;
+    stroke-linecap: round;
+    animation: ButtonDash 1.5s ease-in-out infinite;
+    position: absolute;
+  }
+  
+  /* Secondary loading stroke color */
+  .Button--Secondary.Button__Loading--default
+    .Button__Loading__Container
+    .Button__Loading__Spinner
+    .Button__Loading__Spinner__Path {
+    stroke: #7e8b9d;
+  }
+  
+  @keyframes ButtonDash {
+    0% {
+      stroke-dasharray: 1, 150;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -35;
+    }
+    100% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -124;
+    }
+  }
+  
+  @keyframes ButtonDashRotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }

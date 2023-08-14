@@ -1,0 +1,39 @@
+.Icon {
+    color: var(--c-purple);
+    --icon-primary-color: var(--c-ink-light);
+    --icon-secondary-color: transparent;
+  }
+  
+  .Icon__Loading {
+    animation: IconDashRotate 2s linear infinite;
+    opacity: 1;
+  }
+  
+  .Icon__Loading__Spinner__Path {
+    stroke: var(--c-ink-light);
+    stroke-linecap: round;
+    animation: IconDash var(--c-transition-1500ms) ease-in-out infinite;
+    position: absolute;
+  }
+  
+  @keyframes IconDash {
+    0% {
+      stroke-dasharray: 1, 150;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -35;
+    }
+    100% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -124;
+    }
+  }
+  
+  @keyframes IconDashRotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

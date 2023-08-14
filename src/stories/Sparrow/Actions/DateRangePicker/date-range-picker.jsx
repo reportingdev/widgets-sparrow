@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import SparrowDateRangePicker from './DateRangePicker'
 import { PERIODS_LIST } from './constants'
 
-export const DateRangePicker = ({color, onChange, canSelectToday, enableLocalDates} :Widget) => {
+export const DateRangePicker = ({color, onChange, canSelectToday, enableLocalDates}) => {
   const [dateRange, setDateRange] = useState({
     from: enableLocalDates? DateTime.local().minus({ days: 29 }).toFormat('yyyy-MM-dd'): DateTime.utc().minus({days:29}),
     to: enableLocalDates? DateTime.local().minus({ days: 1 }).toFormat('yyyy-MM-dd'): DateTime.utc().minus({days:1}),

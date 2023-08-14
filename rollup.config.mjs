@@ -36,6 +36,7 @@ export default {
     commonjs(),
     typescript({
       outDir: "./dist",
+      include: ['*.js+(|x)', '**/*.js+(|x)'], // This line
     }),
     shadowRoot()
   ],

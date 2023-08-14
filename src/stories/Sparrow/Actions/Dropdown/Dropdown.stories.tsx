@@ -3,6 +3,7 @@ import * as React from 'react'
 
 // import and export our Dropdown component
 import { Dropdown } from './Dropdown'
+import { actionDataGenerator } from '../../../utils/generators';
 
 export default {
   title: 'Sparrow/Actions/Dropdown',
@@ -102,19 +103,7 @@ const Template = (args:any) => <Dropdown {...args} />;
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
-const defaultOptionData:WidgetData = {
-  datasets: [{
-    label: 'labels',
-    data: ['Facebook','Instagram','Twitter'],
-    dataType: 'string',
-    },
-    {
-      label: 'values',
-      data: ['facebook','instagram','instagram'],
-      dataType: 'string',
-    }
-  ]
-};
+const defaultOptionData:WidgetData = actionDataGenerator()
 
 Primary.args = {
   data: defaultOptionData,

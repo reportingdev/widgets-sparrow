@@ -2,7 +2,7 @@ import {DateRangePicker} from './date-range-picker'
 
 
 export default {
-  title: 'Sparrow/Actions/DatePicker',
+  title: 'Sparrow/Actions/DateRangePicker',
   component: DateRangePicker,
   widgetConfig: {
     data: false,

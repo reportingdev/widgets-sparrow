@@ -9,7 +9,16 @@ const containsAllZeros = (test:string) => {
   return true;
 }
 
+const convertPxToNumber = (value:string) =>{
+  if(value.endsWith('px')) {
+    value = value.slice(0, -2)
+  }
+  return +value;
+
+}
+
 export {
-  containsAllZeros
+  containsAllZeros,
+  convertPxToNumber
 };
 

@@ -45,7 +45,6 @@ export const Dropdown =({data,placeholderText, isDisabled, loading, showLabel, l
     });
   }
   const dropdownValues:any[] = generateDropdownValues(data);
-  console.log(dropdownValues)
 
   const [selected, setSelected] = React.useState(
     enableMultiSelect? ([] as OptionTypeArray):(null as unknown as SingleOptionType)

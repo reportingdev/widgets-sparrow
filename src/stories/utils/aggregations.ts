@@ -19,7 +19,7 @@ const mode = (a:any[]) =>
   const aggregateData = (values:Values, aggregation='total')=> {
     
     if(values.length === 0) {
-      return '-';
+      return 0;
     }
     if(aggregation === 'total') {
       return sum(values as number[]);

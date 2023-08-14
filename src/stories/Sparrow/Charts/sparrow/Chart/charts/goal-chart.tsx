@@ -54,7 +54,7 @@ const GoalChart: FC<Props> = ({
     if (showValue === true) {
       svg
         .append('text')
-        .attr('class', s['GoalChart__progress-label'])
+        .attr('class', `${s['GoalChart__progress-label']} goal-progress-label`)
         .text('0%')
     }
 
@@ -71,7 +71,7 @@ const GoalChart: FC<Props> = ({
     const endPercent = data / 100
     const step = endPercent < startPercent ? -0.01 : 0.01
     const mainArc = svg.select('.foreground')
-    const label = svg.select(`.${s['GoalChart__progress-label']}`)
+    const label = showValue? svg.select(`.goal-progress-label`):undefined;
     let count = Math.abs((endPercent - startPercent) / 0.01)
     let progress = startPercent
 
@@ -79,10 +79,12 @@ const GoalChart: FC<Props> = ({
       const fill = colorScale(pgrs).css()
 
       mainArc.attr('d', arc.endAngle(twoPi * pgrs)).attr('fill', fill)
-      label.attr('fill', fill).text(`${Math.round(pgrs * 100)}%`)
-      if (label.node() != null) {
-        const BCrect = (label.node() as any).getBoundingClientRect()
-        label.attr('x', -BCrect.width / 2)
+      if(label) {
+        label.attr('fill', fill).text(`${Math.round(pgrs * 100)}%`)
+        if (label.node() != null) {
+          const BCrect = (label.node() as any).getBoundingClientRect()
+          label.attr('x', -BCrect.width / 2)
+        }
       }
     }
 

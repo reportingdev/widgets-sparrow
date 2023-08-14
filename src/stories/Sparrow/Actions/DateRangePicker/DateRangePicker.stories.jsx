@@ -7,7 +7,21 @@ export default {
   widgetConfig: {
     data: false,
     action: true,
-    changeRate: false, 
+    changeRate: false,
+    actionFields: {
+      startDate: {
+        description: 'The start date (YYYY-MM-DD) of the selected date range',
+        type: 'string'
+      },
+      endDate: {
+        description: 'The end date (YYYY-MM-DD) of the selected date range',
+        type: 'string'
+      },
+      period: {
+        description: 'The string representation of the selected date range (e.g. `last28days`)',
+        type: 'string'
+      },
+    },
   },
   argTypes: {
     onChange: { action: 'changed', description: 'Change event handler' },

@@ -12,6 +12,12 @@ export default {
     changeRate: false,
     action: true,
     defaultSize: 'auto',
+    actionFields: {
+      selected: {
+        description: 'The selected value.',
+        type: 'string'
+      }
+    },
   },
   argTypes: {
     data: {control: 'object'},

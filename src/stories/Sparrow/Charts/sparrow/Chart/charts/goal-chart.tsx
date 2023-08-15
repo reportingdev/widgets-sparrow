@@ -14,9 +14,9 @@ const GoalChart: FC<Props> = ({
   border = 5,
   stepColors,
   useBackground,
-  imgSrc,
-  imgGap = 0,
-  showValue
+  showValue,
+  showPath,
+  label,
 }) => {
   const colorScale = chroma.scale(stepColors)
 
@@ -43,7 +43,7 @@ const GoalChart: FC<Props> = ({
       .attr('viewBox', `${startX} ${startY} ${width} ${height}`)
       .style('position', 'absolute')
 
-    if (imgSrc == null || imgSrc === '') {
+    if (showPath) {
       svg
         .append('path')
         .attr('fill', '#E0E6EE')
@@ -55,7 +55,15 @@ const GoalChart: FC<Props> = ({
       svg
         .append('text')
         .attr('class', `${s['GoalChart__progress-label']} goal-progress-label`)
-        .text('0%')
+        .attr('y', label ? "-0.5em" : "0em") // shift upwards when both label and value are present
+        .text('0%');
+      if (label) {
+        svg
+          .append('text')
+          .attr('class', `${s['GoalChart__label']} goal-label`)
+          .attr('y', "1.5em") // positioned below the progress label
+          .text(label)
+      }
     }
 
     svg
@@ -63,7 +71,7 @@ const GoalChart: FC<Props> = ({
       .attr('class', 'foreground')
       .attr('fill-opacity', 1)
       .attr('d', arc.cornerRadius(50).endAngle(0))
-  }, [arc, border, imgSrc, twoPi, width, height, showValue])
+  }, [arc, border, twoPi, width, height, showValue])
 
   useLayoutEffect(() => {
     const svg = d3.select(ref.current)
@@ -71,19 +79,29 @@ const GoalChart: FC<Props> = ({
     const endPercent = data / 100
     const step = endPercent < startPercent ? -0.01 : 0.01
     const mainArc = svg.select('.foreground')
-    const label = showValue? svg.select(`.goal-progress-label`):undefined;
+    const labelValue = showValue ? svg.select(`.goal-progress-label`) : undefined;
+    const labelText = label ? svg.select(`.${s['GoalChart__label']}`) : undefined;
+
     let count = Math.abs((endPercent - startPercent) / 0.01)
     let progress = startPercent
 
+    if(labelText) {
+      if (labelText.node() != null) {
+        const BCrect = (labelText.node() as any).getBoundingClientRect();
+        labelText.attr('x', -BCrect.width / 2);
+      }
+    }
+
+    
     const updateProgress = (pgrs: number): void => {
       const fill = colorScale(pgrs).css()
 
       mainArc.attr('d', arc.endAngle(twoPi * pgrs)).attr('fill', fill)
-      if(label) {
-        label.attr('fill', fill).text(`${Math.round(pgrs * 100)}%`)
-        if (label.node() != null) {
-          const BCrect = (label.node() as any).getBoundingClientRect()
-          label.attr('x', -BCrect.width / 2)
+      if(labelValue) {
+        labelValue.attr('fill', fill).text(`${Math.round(pgrs * 100)}%`)
+        if (labelValue.node() != null) {
+          const BCrect = (labelValue.node() as any).getBoundingClientRect()
+          labelValue.attr('x', -BCrect.width / 2)
         }
       }
     }
@@ -100,7 +118,6 @@ const GoalChart: FC<Props> = ({
     window.requestAnimationFrame(loop)
   }, [data, arc, colorScale, twoPi, height, border])
 
-  const imageSize = width - (border + imgGap) * 2
   return (
     <div
       className={s.GoalChart}
@@ -111,14 +128,6 @@ const GoalChart: FC<Props> = ({
         <div
           style={{ backgroundColor: stepColors[0] }}
           className={s.GoalChart__background}
-        />
-      )}
-      {imgSrc != null && imgSrc !== '' && (
-        <img
-          className={s.GoalChart__image}
-          style={{ width: imageSize, height: imageSize }}
-          src={imgSrc}
-          alt='goal'
         />
       )}
       {children}

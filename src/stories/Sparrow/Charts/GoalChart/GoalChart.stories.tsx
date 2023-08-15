@@ -40,10 +40,10 @@ dummyData.datasets[0].label = 'Your Campaign';
 Primary.args = {
   data: dummyData,
   loading: false,
-  color: '#FF5860',
   borderWidth: '5px',
-  width: '100px',
-  height: '100px',
+  size: '100px',
   showBackground: true,
-  showValue: true
+  showValue: true,
+  showLabel: false,
+  showPath: true,
 };

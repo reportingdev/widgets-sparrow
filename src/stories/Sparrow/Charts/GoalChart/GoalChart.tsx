@@ -6,6 +6,8 @@ import Chart from '../sparrow/Chart';
 import '../../KPI/KPI/kpi.css';
 import { convertPxToNumber } from '../../../utils/helpers';
 import { aggregateData } from '../../../utils/aggregations';
+import s from '../sparrow/Chart/style/chart.module.css'
+import { getIcon } from '../../../utils/icons';
 
 /**
  * Primary UI component for user interaction
@@ -13,52 +15,92 @@ import { aggregateData } from '../../../utils/aggregations';
 export const GoalChart = ({
   data,
   loading,
-  color,
   borderWidth,
-  width,
-  height,
+  size,
+  variant,
+  imageSrc,
+  imageGap,
+  icon,
+  iconFormat,
+  iconSize,
   showBackground,
   showValue,
+  showLabel,
+  showValueAsPercentage,
+  showPath
 }: Widget) => {
 
   const calculatePercentage = (data: WidgetData): number => {
     const { datasets, dimension } = data;
-  
+
     if (!datasets.length || !dimension) return 0;
-  
+
     const datasetValue = aggregateData(datasets[0].data, datasets[0].aggregationType || 'total');
     const dimensionValue = aggregateData(dimension.data, datasets[0].aggregationType || 'total'); // Assuming total aggregation for dimension
-  
+
     if (dimensionValue === 0) return 0;  // Avoid division by zero
-  
+
     return (datasetValue / dimensionValue) * 100;
   };
 
   // calculate percentage
-  const percentageValue = calculatePercentage(data);
+  const displayValue = showValueAsPercentage ? calculatePercentage(data) : 0// aggregateData();
   
+  // visual variables
+  const datasetLabel = data?.datasets?.[0]?.label ?? 'undefined';
+  const color = data?.datasets?.[0]?.backgroundColor ?? '#FF5860';
+  const sizeValue = convertPxToNumber(size);
+  const borderWidthValue = convertPxToNumber(borderWidth)
 
-  //const chartColor = '#FF5860';
-  // const TestElment = (
-  //   <div style={{display: 'flex', flexDirection: 'column',alignItems: 'center'}}>
-  //     <p className='KPI__Metric'>500</p>
-  //     <p className="KPI__Label">Hello World</p>
-  //   </div>
-  // )
+  // user can choose image, icon, progress
+  // other: backgroundGap
+  // progress: asPercentage, showLabel, (labelFontSize, valueFontSize -- could be multipled by height),
+  
+  //TODO
+  /*
+     - add loading state
+     - add the option to show data as non-percent
+     - update size of progress labels to increase/decrease with size of chart
+     - test icon and image variants
+  */
+  
+  let ChildComponent;
+
+  if (variant === 'image') {
+    const imageGapValue = convertPxToNumber(imageGap)
+    const imageSize = sizeValue - (borderWidthValue + imageGapValue) * 2
+
+    ChildComponent = (<img
+      className={s.GoalChart__image}
+      style={{ width: imageSize, height: imageSize }}
+      src={imageSrc}
+      alt='goal'
+    />);
+  } else if (variant === 'icon') {
+    const iconSizeValue = convertPxToNumber(iconSize);
+    const HeroIcon = icon ? getIcon(icon, iconFormat) : null;
+    const iconStyles = { height: iconSizeValue, width: iconSizeValue, color };
+    ChildComponent = (
+      <HeroIcon style={iconStyles} />
+    );
+  }
+
   return (
     <Chart
-        type='goal'
-        loading={loading}
-        stepColors={[color]}
-        border={convertPxToNumber(borderWidth)}
-        data={percentageValue}
-        width={convertPxToNumber(width)}
-        height={convertPxToNumber(height)}
-        useBackground={showBackground}
-        showValue={showValue}
-      >
-        {/* {!showValue && 'likes'} */}
-      </Chart>
+      type='goal'
+      loading={loading}
+      stepColors={[color]}
+      border={borderWidthValue}
+      data={displayValue}
+      width={sizeValue}
+      height={sizeValue}
+      useBackground={showBackground}
+      showValue={showValue}
+      label={showLabel && datasetLabel}
+      showPath={showPath}
+    >
+      {ChildComponent}
+    </Chart>
 
   );
 };
@@ -66,12 +108,19 @@ export const GoalChart = ({
 GoalChart.propTypes = {
   data: PropTypes.object,
   loading: PropTypes.bool,
-  color: PropTypes.string,
   borderWidth: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string,
+  size: PropTypes.string,
+  variant: PropTypes.string,
+  imageSrc: PropTypes.string,
+  imageGap: PropTypes.string,
+  icon: PropTypes.string,
+  iconFormat: PropTypes.string,
+  iconSize: PropTypes.string,
   showBackground: PropTypes.bool,
-  showValue: PropTypes.bool
+  showValue: PropTypes.bool,
+  showValueAsPercentage: PropTypes.bool,
+  showLabel: PropTypes.bool,
+  showPath: PropTypes.bool
 };
 
 const dummyData = widgetDataGenerator(2, true, false);
@@ -82,12 +131,19 @@ dummyData.datasets[0].label = 'Your Campaign';
 GoalChart.defaultProps = {
   data: dummyData,
   loading: false,
-  color: '#FF5860',
   borderWidth: '5px',
-  width: '100px',
-  height: '100px',
+  size: '100px',
+  variant: 'progress',
+  imageSrc: '',
+  imageGap: '0px',
+  icon: '',
+  iconFormat: 'solid',
+  iconSize: '16px',
   showBackground: true,
-  showValue: true
+  showValue: true,
+  showValueAsPercentage:true,
+  showLabel: false,
+  showPath: true,
 };
 
 

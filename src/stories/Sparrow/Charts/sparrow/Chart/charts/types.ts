@@ -171,6 +171,8 @@ export interface GoalChartProps extends Omit<ChartProps, 'variant'> {
   imgSrc?: string
   imgGap?: number
   showValue?: boolean
+  showPath?: boolean
+  label?: string
   children?: React.ReactNode
 }
 

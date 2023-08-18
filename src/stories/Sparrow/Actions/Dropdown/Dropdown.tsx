@@ -28,14 +28,14 @@ const optionsWithImages: OptionTypeArray = [
 export const Dropdown =({data,placeholderText, isDisabled, loading, showLabel, label, isOptionsWithImages, isSearchable, enableMultiSelect, isScrollable,isPlaceholderInvalidImage, onChange, withCustomElement, color, allSelectedLabel}:Widget)=>{
 
   const generateDropdownValues = (data:WidgetData) => {
-    const { datasets } = data;
+    const { datasets,dimension } = data;
   
     if (!datasets || datasets.length === 0) {
       return [];
     }
   
     const labelsDataset = datasets[0].data;
-    const valuesDataset = datasets.length > 1 ? datasets[1].data : datasets[0].data;
+    const valuesDataset = dimension?.data ?? labelsDataset 
   
     return labelsDataset.map((label, index) => {
       return {

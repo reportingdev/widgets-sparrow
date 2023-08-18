@@ -10,6 +10,7 @@ export default {
   component: Dropdown,
   widgetConfig: {
     data: true,
+    dimension: false,
     changeRate: false,
     action: true,
     defaultSize: 'auto',

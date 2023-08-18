@@ -157,12 +157,12 @@ const actionDataGenerator = () => {
       data: ['Facebook','Instagram','Twitter'],
       dataType: 'string',
       },
-      {
-        label: 'values',
-        data: ['facebook','instagram','twitter'],
-        dataType: 'string',
-      }
-    ]
+    ],
+    dimension: {
+      label: 'values',
+      data: ['facebook','instagram','twitter'],
+      dataType: 'string',
+    }
   };
   return defaultOptionData;
 }

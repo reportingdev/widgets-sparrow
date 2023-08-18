@@ -11,6 +11,7 @@ export default {
   widgetConfig: {
     data: true,
     dimension: false,
+    fieldLimit: 1,
     changeRate: false,
     action: true,
     defaultSize: 'auto',

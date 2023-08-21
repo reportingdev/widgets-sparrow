@@ -10,7 +10,7 @@ export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   label?:string
   color: string
   isDisabled?: boolean
-  loadingIconColor: string
+  loadingIconColor?: string
 }
 
 /**

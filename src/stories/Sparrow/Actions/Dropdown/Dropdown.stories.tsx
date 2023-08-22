@@ -113,16 +113,15 @@ Primary.args = {
   placeholderText: 'Select...',
   showLabel:false,
   label:'Select a platform',
+  isSearchable: false,
+  isScrollable: false,
   // color:'#866cff',
   // isDisabled:false,
   //isOptionsWithImages: false,
-  isSearchable: false,
-  isScrollable: false,
   // enableMultiSelect: false,
   // allSelectedLabel: 'All Platforms',
   // isPlaceholderInvalidImage: false,
   // withCustomElement: false,
 };
-
 
 

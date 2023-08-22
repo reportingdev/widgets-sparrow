@@ -83,7 +83,7 @@
     background-repeat: no-repeat;
     color: var(--color-disabled);
     cursor: pointer;
-    background-image: url('./images/icon-arrow-left.svg');
+    background-image: url('https://storage.googleapis.com/sm-staging-sparrow-api-public-35c79187/storybook/icon-arrow-left.svg');
   }
   
   .DayPicker-NavButton:hover {

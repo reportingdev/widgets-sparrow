@@ -6,7 +6,7 @@ import SparrowButton from '../Button'
 import './daterangepicker.css'
 
 
-export const DateContext = React.createContext()
+export const DateContext = React.createContext(null)
 
 const DateRangeOverlay = ({
   classNames,
@@ -14,7 +14,7 @@ const DateRangeOverlay = ({
   selectedDay,
   month,
   ...props
-}) => {
+}: any) => {
   const {
     currentPeriod,
     setPeriod,
@@ -24,14 +24,14 @@ const DateRangeOverlay = ({
     hideDefaultTimePeriod,
     style,
     color,
-  } = useContext(DateContext)
-  const [error, setError] = useState(null)
+  }: any = useContext(DateContext)
+  const [error, setError] = useState<any>(null)
   const { from, to } = selectedDay[1]
   const startDate = from ? DateTime.fromJSDate(from).toFormat('MMM d') : ''
   const endDate = to ? DateTime.fromJSDate(to).toFormat('MMM d') : ''
   const yesterday = DateTime.local().minus({ day: 1 }).toFormat('yyyy-MM-dd')
 
-  const handleDateInput = (dateProp, e) => {
+  const handleDateInput = (dateProp: any, e: any) => {
     setError(null)
     const { value } = e.target
     const date = new Date(value)

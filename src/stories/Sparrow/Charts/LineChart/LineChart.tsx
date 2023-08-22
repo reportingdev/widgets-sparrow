@@ -180,7 +180,7 @@ LineChart.defaultProps = {
   keepTooltipInsideContainer: false,
   showLegend: true,
   axisColor: "#7E8B9D",
-  labelPosition: 'top',
+  labelPosition: 'bottom',
   labelAlignment: 'right'
 };
 

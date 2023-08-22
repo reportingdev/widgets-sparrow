@@ -10,6 +10,7 @@ export default {
   component: LineBarChart,
   widgetConfig: {
     data: true,
+    dimension: true,
     changeRate: false,
     action: false,
     actionFields: {},

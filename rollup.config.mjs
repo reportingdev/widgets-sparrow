@@ -37,6 +37,6 @@ export default {
     typescript({
       outDir: "./dist",
     }),
-    shadowRoot()
+    //shadowRoot()
   ],
 };

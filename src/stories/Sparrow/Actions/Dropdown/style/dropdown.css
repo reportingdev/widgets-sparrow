@@ -22,6 +22,7 @@
   
   .Dropdown__optionContainer {
     cursor: pointer;
+    min-width: 200px;
   }
   
   .Dropdown__optionImage {

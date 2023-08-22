@@ -9,6 +9,8 @@ export default {
   component: GoalChart,
   widgetConfig: {
     data: true,
+    fieldLimit: true,
+    dimension: true,
     changeRate: false,
     action: false,
     actionFields: {},

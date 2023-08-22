@@ -10,6 +10,8 @@ export default {
   component: CurveChart,
   widgetConfig: {
     data: true,
+    dimension: true,
+    fieldLimit: 1,
     changeRate: false,
     action: false,
     actionFields: {},

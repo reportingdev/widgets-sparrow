@@ -1,17 +1,17 @@
 import { DateTime } from 'luxon'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types';
-import SparrowDateRangePicker from './DateRangePicker'
-import { PERIODS_LIST } from './constants'
+import SparrowDateRangePicker from './date-range-picker'
+import { PERIOD_OPTIONS } from './constants'
 
-export const DateRangePicker = ({color, onChange, canSelectToday, enableLocalDates} :Widget) => {
-  const [dateRange, setDateRange] = useState({
+export const DateRangePicker = ({color, onChange, canSelectToday, enableLocalDates}: any) => {
+  const [dateRange, setDateRange] = useState<any>({
     from: enableLocalDates? DateTime.local().minus({ days: 29 }).toFormat('yyyy-MM-dd'): DateTime.utc().minus({days:29}),
     to: enableLocalDates? DateTime.local().minus({ days: 1 }).toFormat('yyyy-MM-dd'): DateTime.utc().minus({days:1}),
-    period: PERIODS_LIST.last28days
+    period: PERIOD_OPTIONS.last28days
   })
 
-  const onDateChange = ({ start, end, period }) => {
+  const onDateChange = ({ start, end, period }: any): any => {
     const startDate = DateTime.fromISO(start).toFormat('yyyy-MM-dd')
     const endDate = DateTime.fromISO(end).toFormat('yyyy-MM-dd')
 
@@ -19,7 +19,7 @@ export const DateRangePicker = ({color, onChange, canSelectToday, enableLocalDat
       start: startDate,
       end: endDate,
       period
-    })
+    } as any)
     onChange({startDate,endDate,period})
   }
  

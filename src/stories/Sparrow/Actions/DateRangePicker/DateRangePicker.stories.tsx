@@ -1,8 +1,9 @@
-import {DateRangePicker} from './date-range-picker'
+import React from 'react';
+import {DateRangePicker} from './DateRangePicker'
 
 
 export default {
-  title: 'Sparrow/Actions/DatePicker',
+  title: 'Sparrow/Actions/DateRangePicker',
   component: DateRangePicker,
   widgetConfig: {
     data: false,
@@ -47,7 +48,7 @@ export default {
 }
 
 
-const Template = (args) => <DateRangePicker {...args} />;
+const Template = (args: any) => <DateRangePicker {...args} />;
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args

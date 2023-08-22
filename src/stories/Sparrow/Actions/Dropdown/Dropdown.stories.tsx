@@ -3,12 +3,15 @@ import * as React from 'react'
 
 // import and export our Dropdown component
 import { Dropdown } from './Dropdown'
+import { actionDataGenerator } from '../../../utils/generators';
 
 export default {
   title: 'Sparrow/Actions/Dropdown',
   component: Dropdown,
   widgetConfig: {
     data: true,
+    dimension: false,
+    fieldLimit: 1,
     changeRate: false,
     action: true,
     defaultSize: 'auto',
@@ -102,19 +105,7 @@ const Template = (args:any) => <Dropdown {...args} />;
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
-const defaultOptionData:WidgetData = {
-  datasets: [{
-    label: 'labels',
-    data: ['Facebook','Instagram','Twitter'],
-    dataType: 'string',
-    },
-    {
-      label: 'values',
-      data: ['facebook','instagram','instagram'],
-      dataType: 'string',
-    }
-  ]
-};
+const defaultOptionData:WidgetData = actionDataGenerator()
 
 Primary.args = {
   data: defaultOptionData,
@@ -122,16 +113,15 @@ Primary.args = {
   placeholderText: 'Select...',
   showLabel:false,
   label:'Select a platform',
+  isSearchable: false,
+  isScrollable: false,
   // color:'#866cff',
   // isDisabled:false,
   //isOptionsWithImages: false,
-  isSearchable: false,
-  isScrollable: false,
   // enableMultiSelect: false,
   // allSelectedLabel: 'All Platforms',
   // isPlaceholderInvalidImage: false,
   // withCustomElement: false,
 };
-
 
 

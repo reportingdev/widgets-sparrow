@@ -15,15 +15,15 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl, loading }) => {
   }, [loading]);
 
   const getVideoType = (url: string): string | null => {
-    if (url.endsWith(".mp4")) return "video/mp4";
-    if (url.endsWith(".webm")) return "video/webm";
-    if (url.endsWith(".ogg") || url.endsWith(".ogv")) return "video/ogg"; // ".ogv" is another common extension for Ogg video files
+    if (url?.endsWith?.(".mp4")) return "video/mp4";
+    if (url?.endsWith?.(".webm")) return "video/webm";
+    if (url?.endsWith?.(".ogg") || url?.endsWith?.(".ogv")) return "video/ogg"; // ".ogv" is another common extension for Ogg video files
     return null;
   };
   
 
-  const isYouTube = videoUrl.includes("youtube.com");
-  const isVimeo = videoUrl.includes("vimeo.com");
+  const isYouTube = videoUrl?.includes?.("youtube.com");
+  const isVimeo = videoUrl?.includes?.("vimeo.com");
 
   const commonStyles: React.CSSProperties = {
     width: '100%',

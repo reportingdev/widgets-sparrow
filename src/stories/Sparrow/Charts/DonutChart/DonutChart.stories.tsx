@@ -10,6 +10,7 @@ export default {
   component: DonutChart,
   widgetConfig: {
     data: true,
+    dimension: false,
     changeRate: false,
     action: false,
     actionFields: {},

@@ -10,6 +10,7 @@ export default {
   component: AreaChart,
   widgetConfig: {
     data: true,
+    dimension: true,
     changeRate: false,
     action: false,
     actionFields: {},
@@ -81,6 +82,6 @@ Primary.args = {
   keepTooltipInsideContainer: false,
   showLegend: true,
   axisColor: "#7E8B9D",
-  labelPosition: 'top',
-  labelAlignment: 'right'
+  labelPosition: 'bottom',
+  labelAlignment: 'right',
 };

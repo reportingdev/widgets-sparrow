@@ -27,7 +27,7 @@
     "typeRoots": ["./types", "./node_modules/@types"]
   },
   "include": ["src/**/*", "types/**/*"],
-  "exclude": ["./dist", "**/*.stories.(tsx|mdx)", "**/*.snap"],
+  "exclude": ["./dist", "**/*.stories.(tsx|mdx)", "**/*.snap","node_modules"],
   "rules": {
     "restrict-plus-operands": "off",
     "restrict-template-expressions": "off"

@@ -85,6 +85,6 @@ Primary.args = {
   formatXAxisLabel: 'none',
   keepTooltipInsideContainer: false,
   showLegend: true,
-  labelPosition: 'top',
+  labelPosition: 'bottom',
   labelAlignment: 'right'
 };

@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { DateTime } from 'luxon'
 import classnames from 'classnames'
-import IconCalendar from './images/icon-calendar.svg'
-import IconTriangle from './images/icon-triangle.svg'
 import { PERIOD_OPTIONS } from './constants'
 
 export default class DateRangeInput extends Component {
   renderDateRange () {
-    const { from, to, currentPeriod, hideDefaultTimePeriod } = this.props
+    const { from, to, currentPeriod, hideDefaultTimePeriod } : any = this.props 
     const startDate = from ? DateTime.fromJSDate(from).toFormat('MMM d') : ''
     const endDate = to ? DateTime.fromJSDate(to).toFormat('MMM d') : ''
 
@@ -46,7 +44,7 @@ export default class DateRangeInput extends Component {
       currentPeriod,
       hideDefaultTimePeriod,
       ...props
-    } = this.props
+    }: any = this.props
     const buttonClasses = classnames('DayPickerInput__labelWrapper', {
       'DayPickerInput__labelWrapper--error': error,
       'DayPickerInput__labelWrapper--disabled': disabled,
@@ -61,9 +59,9 @@ export default class DateRangeInput extends Component {
         disabled={disabled}
         className={buttonClasses}
       >
-        <img src={IconCalendar} alt='calendar' />
+        <img src="https://storage.googleapis.com/sm-staging-sparrow-api-public-35c79187/storybook/icon-calendar.svg" alt='calendar' />
         {this.renderDateRange()}
-        <img src={IconTriangle} alt='triangle' />
+        <img src="https://storage.googleapis.com/sm-staging-sparrow-api-public-35c79187/storybook/icon-triangle.svg" alt='triangle' />
       </button>
     )
   }

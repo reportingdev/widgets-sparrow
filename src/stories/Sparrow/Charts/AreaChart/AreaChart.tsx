@@ -132,7 +132,7 @@ AreaChart.propTypes = {
   showLegend: PropTypes.bool,
   axisColor: PropTypes.string,
   labelPosition: PropTypes.string,
-  labelAlignment: PropTypes.string
+  labelAlignment: PropTypes.string,
 };
 
 const chartSampleData = widgetDataGenerator(1, true, false);

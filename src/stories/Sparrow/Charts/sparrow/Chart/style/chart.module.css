@@ -474,11 +474,15 @@ rect.hovered {
   object-fit: cover;
 }
 
+.GoalChart__label {
+  font-size: 16px;
+  font-weight: 300;
+}
+
 .GoalChart__progress-label {
-  font-weight: 700;
+  font-weight: 500;
   font-size: 22px;
-  line-height: 36px;
-  dominant-baseline: central;
+  /* line-height: 36px; */
 }
 
 .axis-labels {

@@ -173,6 +173,8 @@ export interface GoalChartProps extends Omit<ChartProps, 'variant'> {
   showValue?: boolean
   showPath?: boolean
   label?: string
+  labelColor?: string
+  isLoading?: boolean
   children?: React.ReactNode
 }
 

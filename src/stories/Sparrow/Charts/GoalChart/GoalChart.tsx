@@ -19,14 +19,12 @@ export const GoalChart = ({
   size,
   variant,
   imageSrc,
-  imageGap,
+  imagePadding,
   icon,
   iconFormat,
-  iconSize,
   showBackground,
-  showValue,
   showLabel,
-  showValueAsPercentage,
+  labelColor,
   showPath
 }: Widget) => {
 
@@ -44,13 +42,14 @@ export const GoalChart = ({
   };
 
   // calculate percentage
-  const displayValue = showValueAsPercentage ? calculatePercentage(data) : 0// aggregateData();
-  
+  const displayValue = calculatePercentage(data) 
+
   // visual variables
   const datasetLabel = data?.datasets?.[0]?.label ?? 'undefined';
   const color = data?.datasets?.[0]?.backgroundColor ?? '#FF5860';
-  const sizeValue = convertPxToNumber(size);
+  const sizeValue = Math.max(convertPxToNumber(size),50);
   const borderWidthValue = convertPxToNumber(borderWidth)
+  let stepColors = [color];
 
   // user can choose image, icon, progress
   // other: backgroundGap
@@ -66,38 +65,58 @@ export const GoalChart = ({
   
   let ChildComponent;
 
-  if (variant === 'image') {
-    const imageGapValue = convertPxToNumber(imageGap)
-    const imageSize = sizeValue - (borderWidthValue + imageGapValue) * 2
+  if(variant === 'chroma-progress') {
+    stepColors = ['#FF5860', '#FF9600', '#33C635']
+  }
+  else if (variant === 'image') {
+    const imageGapValue = convertPxToNumber(imagePadding)
+    const imageSize = Math.max(0, sizeValue - (borderWidthValue + imageGapValue) * 2);
 
     ChildComponent = (<img
       className={s.GoalChart__image}
       style={{ width: imageSize, height: imageSize }}
       src={imageSrc}
-      alt='goal'
-    />);
+      alt='goal chart'
+    />);    
   } else if (variant === 'icon') {
-    const iconSizeValue = convertPxToNumber(iconSize);
+    const labelTextFontSize = Math.round(sizeValue / 12);
+    const iconSizeValue = Math.round(sizeValue / 3);
     const HeroIcon = icon ? getIcon(icon, iconFormat) : null;
-    const iconStyles = { height: iconSizeValue, width: iconSizeValue, color };
+    const iconStyles = { 
+      height: iconSizeValue, 
+      width: iconSizeValue, 
+      color
+    };
+    const labelTextStyles = {
+      fontSize: `${labelTextFontSize}px`,
+      lineHeight: `${labelTextFontSize}px`,
+      marginTop: `${Math.round(sizeValue/20)}px`,
+      color: labelColor ?? '#2C304F',
+    };
+
     ChildComponent = (
-      <HeroIcon style={iconStyles} />
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        {HeroIcon && <HeroIcon style={iconStyles} />}
+        {showLabel && datasetLabel && <div className="GoalChart__label" style={labelTextStyles}>{datasetLabel}</div>}
+      </div>
     );
-  }
+}
+
+
 
   return (
     <Chart
       type='goal'
-      loading={loading}
-      stepColors={[color]}
+      stepColors={stepColors}
       border={borderWidthValue}
       data={displayValue}
       width={sizeValue}
       height={sizeValue}
       useBackground={showBackground}
-      showValue={showValue}
       label={showLabel && datasetLabel}
+      labelColor={labelColor}
       showPath={showPath}
+      isLoading={loading}
     >
       {ChildComponent}
     </Chart>
@@ -112,14 +131,13 @@ GoalChart.propTypes = {
   size: PropTypes.string,
   variant: PropTypes.string,
   imageSrc: PropTypes.string,
-  imageGap: PropTypes.string,
+  imagePadding: PropTypes.string,
   icon: PropTypes.string,
   iconFormat: PropTypes.string,
   iconSize: PropTypes.string,
   showBackground: PropTypes.bool,
-  showValue: PropTypes.bool,
-  showValueAsPercentage: PropTypes.bool,
   showLabel: PropTypes.bool,
+  labelColor: PropTypes.string,
   showPath: PropTypes.bool
 };
 
@@ -133,16 +151,15 @@ GoalChart.defaultProps = {
   loading: false,
   borderWidth: '5px',
   size: '100px',
-  variant: 'progress',
-  imageSrc: '',
-  imageGap: '0px',
-  icon: '',
-  iconFormat: 'solid',
-  iconSize: '16px',
   showBackground: true,
-  showValue: true,
-  showValueAsPercentage:true,
+  variant: 'progress',
+  imageSrc: 'https://uploads-ssl.webflow.com/63c6e835dc1c7763baa585f4/64e546f3e0d382a4060af113_reporting-dev-icon.jpeg',
+  imagePadding: '0px',
+  icon: 'LightBulb',
+  iconFormat: 'outline',
+  iconSize: '32px',
   showLabel: false,
+  labelColor: '#2C304F',
   showPath: true,
 };
 

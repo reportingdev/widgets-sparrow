@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, FC } from 'react'
+import React, { useRef, useLayoutEffect, FC, useState } from 'react'
 import chroma from 'chroma-js'
 import * as d3 from 'd3'
 
@@ -14,23 +14,28 @@ const GoalChart: FC<Props> = ({
   border = 5,
   stepColors,
   useBackground,
-  showValue,
   showPath,
   label,
+  labelColor,
+  isLoading,
 }) => {
   const colorScale = chroma.scale(stepColors)
-
+  const lastProgressRef = useRef(0);
   const radius = Math.min(width, height) / 2
   const outerRadius = radius - border
-
+  const preciseRound = (num: number, decimalPlaces?: number) => {
+    return parseFloat(num.toFixed(decimalPlaces ?? 2));
+  }
+  const showValue = !children && !isLoading;
   const arc = d3
     .arc()
     .startAngle(0)
     .innerRadius(radius)
     .outerRadius(outerRadius)
   const twoPi = Math.PI * 2
-
   const ref = useRef(null)
+  const [backgroundColor, setBackgroundColor] = useState(stepColors[0]);
+
 
   useLayoutEffect(() => {
     const startX = -width / 2
@@ -50,60 +55,110 @@ const GoalChart: FC<Props> = ({
         .attr('fill-opacity', 0.5)
         .attr('d', arc.endAngle(twoPi))
     }
+    const valueTextFontSize = Math.round(width / 6);
+    const labelTextFontSize = Math.round(width / 12);
 
     if (showValue === true) {
       svg
         .append('text')
         .attr('class', `${s['GoalChart__progress-label']} goal-progress-label`)
+        .attr('style', `font-size: ${valueTextFontSize}px`)
+        .attr('dominant-baseline', 'middle')
         .attr('y', label ? "-0.5em" : "0em") // shift upwards when both label and value are present
         .text('0%');
+      svg.append("clipPath")  // clip is used to manage long label strings
+        .attr("id", "clip")
+        .append("rect")
+        .attr("x", -width * 0.4)       // half of width*0.8 to center it
+        .attr("y", -height / 2)        // center vertically
+        .attr("width", width * 0.8)
+        .attr("height", height);
       if (label) {
         svg
           .append('text')
+          .attr("clip-path", "url(#clip)")
           .attr('class', `${s['GoalChart__label']} goal-label`)
+          .attr('dominant-baseline', 'middle')
           .attr('y', "1.5em") // positioned below the progress label
+          .attr('fill', labelColor ?? '#2C304F')
+          .attr('style', `font-size: ${labelTextFontSize}px`)
           .text(label)
       }
     }
-
     svg
       .append('path')
       .attr('class', 'foreground')
       .attr('fill-opacity', 1)
-      .attr('d', arc.cornerRadius(50).endAngle(0))
-  }, [arc, border, twoPi, width, height, showValue])
+      .attr('d', arc.cornerRadius(50).endAngle(0));
+
+    let loader = svg.select('.group-loader')
+    let loaderG = loader.select('g')
+    if (isLoading === true) {
+      if (loader.empty()) {
+        loader = svg
+          .append('g')
+          .attr('class', 'group-loader');
+
+        loader
+          .append('rect')
+          .attr('x', startX)  // translate it to the top-left
+          .attr('y', startY)  // translate it to the top-left
+          .attr('width', '100%')
+          .attr('height', '100%')
+          .style('fill', 'rgba(255, 255, 255, 0.7)');
+
+        loaderG = loader.append('g')
+
+        loaderG
+          .append('circle')
+          .attr('class', s.loaderCircle)
+          .attr('fill', 'none')
+          .attr('r', 20)
+          .attr('stroke-width', 3)
+          .attr('stroke', '#6B7280');
+      }
+
+      loaderG.attr('transform', `translate(${width / 2 + startX}, ${height / 2 + startY})`);
+    } else {
+      loader.remove()
+    }
+
+  }, [arc, twoPi, width, height, showPath, showValue, isLoading, label])
 
   useLayoutEffect(() => {
     const svg = d3.select(ref.current)
-    const startPercent = 0
-    const endPercent = data / 100
-    const step = endPercent < startPercent ? -0.01 : 0.01
+    const startPercent = preciseRound(lastProgressRef.current);
+    const endPercent = preciseRound(data / 100);
+    const step = endPercent < startPercent ? -0.01 : 0.01;
     const mainArc = svg.select('.foreground')
-    const labelValue = showValue ? svg.select(`.goal-progress-label`) : undefined;
+    const valueText = showValue ? svg.select(`.goal-progress-label`) : undefined;
     const labelText = label ? svg.select(`.${s['GoalChart__label']}`) : undefined;
 
-    let count = Math.abs((endPercent - startPercent) / 0.01)
+    let count = preciseRound(Math.abs((endPercent - startPercent) / 0.01), 0)
+
     let progress = startPercent
 
-    if(labelText) {
+    if (labelText) {
       if (labelText.node() != null) {
         const BCrect = (labelText.node() as any).getBoundingClientRect();
         labelText.attr('x', -BCrect.width / 2);
       }
     }
 
-    
     const updateProgress = (pgrs: number): void => {
+      pgrs = preciseRound(pgrs)
       const fill = colorScale(pgrs).css()
+      setBackgroundColor(fill);
 
       mainArc.attr('d', arc.endAngle(twoPi * pgrs)).attr('fill', fill)
-      if(labelValue) {
-        labelValue.attr('fill', fill).text(`${Math.round(pgrs * 100)}%`)
-        if (labelValue.node() != null) {
-          const BCrect = (labelValue.node() as any).getBoundingClientRect()
-          labelValue.attr('x', -BCrect.width / 2)
+      if (valueText) {
+        valueText.attr('fill', fill).text(`${Math.round(pgrs * 100)}%`)
+        if (valueText.node() != null) {
+          const BCrect = (valueText.node() as any).getBoundingClientRect()
+          valueText.attr('x', -BCrect.width / 2)
         }
       }
+      lastProgressRef.current = pgrs;
     }
 
     const loop = (): void => {
@@ -126,7 +181,7 @@ const GoalChart: FC<Props> = ({
     >
       {useBackground === true && (
         <div
-          style={{ backgroundColor: stepColors[0] }}
+          style={{ backgroundColor }}
           className={s.GoalChart__background}
         />
       )}

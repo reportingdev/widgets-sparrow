@@ -177,11 +177,11 @@ const SparrowDropdown: React.FC<SparrowDropdownProps> = (props) => {
     'ReactSelect--isOpen': isMenuOpen,
     'ReactSelect--isLoading': props.loading
   })
-
+  
   return props.isMulti === true
     ? (
       <div ref={selectContainerRef} className={dropdownWrapperClasses}>
-        {props.label != null && (
+        {props?.label && (
           <span className='Dropdown__label'>{props.label}</span>
         )}
         <Select
@@ -197,7 +197,7 @@ const SparrowDropdown: React.FC<SparrowDropdownProps> = (props) => {
       )
     : (
       <div ref={selectContainerRef} className={dropdownWrapperClasses}>
-        {props.label != null && (
+        {props?.label && (
           <span className='Dropdown__label'>{props.label}</span>
         )}
         <Select

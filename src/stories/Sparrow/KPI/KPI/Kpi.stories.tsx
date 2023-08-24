@@ -10,6 +10,7 @@ export default {
   widgetConfig: {
     data: true,
     changeRate: true,
+    fieldLimit: 1,
     action: false,
     actionFields: {},
     defaultSize: "1:2",

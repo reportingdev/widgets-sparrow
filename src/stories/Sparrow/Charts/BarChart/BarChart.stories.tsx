@@ -10,6 +10,7 @@ export default {
   component: BarChart,
   widgetConfig: {
     data: true,
+    dimension: true,
     changeRate: false,
     action: false,
     actionFields: {},

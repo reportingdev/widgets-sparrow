@@ -13,6 +13,7 @@ const DateRangeOverlay = ({
   children,
   selectedDay,
   month,
+  enableLocalDates,
   ...props
 }: any) => {
   const {
@@ -25,11 +26,14 @@ const DateRangeOverlay = ({
     style,
     color,
   }: any = useContext(DateContext)
+
+  const dateTime = enableLocalDates ? DateTime.local() : DateTime.utc();
   const [error, setError] = useState<any>(null)
   const { from, to } = selectedDay[1]
+
   const startDate = from ? DateTime.fromJSDate(from).toFormat('MMM d') : ''
   const endDate = to ? DateTime.fromJSDate(to).toFormat('MMM d') : ''
-  const yesterday = DateTime.local().minus({ day: 1 }).toFormat('yyyy-MM-dd')
+  const yesterday = dateTime.minus({ day: 1 }).toFormat('yyyy-MM-dd')
 
   const handleDateInput = (dateProp: any, e: any) => {
     setError(null)
@@ -44,9 +48,11 @@ const DateRangeOverlay = ({
     setDate({ [dateProp]: date })
   }
 
+  const overlayClass = classnames(classNames.overlay,'DayPickerInput-Overlay--right');
+
   return (
     <div className={classNames.overlayWrapper} {...props} style={{ ...style }}>
-      <div className={classNames.overlay}>
+      <div className={overlayClass}>
         <div className='DayPicker__mobile-form'>
           <h2 className='DayPicker__mobile-form-title'>Time period</h2>
           {error && <div className='DayPicker__mobile-form-error'>{error}</div>}

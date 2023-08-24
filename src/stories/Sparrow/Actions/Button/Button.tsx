@@ -13,8 +13,13 @@ export const Button = ({ loading, onChange, label, actionValue, color, variant, 
     };
     
     return (
-      <SparrowButton disabled={isDisabled} loading={loading} onClick={onClick} 
-        color={color} variant={variant} loadingIconColor={loadingIconColor}>
+      <SparrowButton 
+        disabled={isDisabled} 
+        loading={loading} 
+        onClick={onClick} 
+        color={color} 
+        variant={variant} 
+      >
         {label}
       </SparrowButton>
     );
@@ -38,6 +43,5 @@ export const Button = ({ loading, onChange, label, actionValue, color, variant, 
     color: '#866cff',
     variant: 'primary',
     isDisabled: false,
-    loadingIconColor:'#927bff',
     actionValue: "Learn more"
   };

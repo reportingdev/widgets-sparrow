@@ -21,15 +21,13 @@ export default class DateRangePicker extends React.Component {
     enableLocalDates: PropTypes.any,
   };
   constructor (props:any) {
+
     const yesterday = props.enableLocalDates? DateTime.local().minus({ day: 1 }):DateTime.utc().minus({ day: 1 })
     super(props);
     (this as any).pickerRef = React.createRef();
     (this as any).calendarRef = React.createRef();
     (this as any).inputRef = React.createRef();
     (this as any).isVisible = false;
-    (this as any).color = props.color;
-    (this as any).canSelectToday = props.canSelectToday;
-    (this as any).enableLocalDates = props.enableLocalDates;
     this.setPeriod = this.setPeriod.bind(this);
     this.setDate = this.setDate.bind(this);
     this.state = {
@@ -44,20 +42,22 @@ export default class DateRangePicker extends React.Component {
     return (e: any) => {
       props.onClick(e)
       if ((this as any).isVisible) {
-        (this as any).pickerRef.current.hideDayPicker()
-        (this as any).isVisible = false
-        return
+        (this as any).pickerRef?.current?.hideDayPicker();
+        (this as any).isVisible = false;
+        return;
       }
-      (this as any).isVisible = true
+      (this as any).isVisible = true;
     }
   }
 
+
   setPeriod = (period: any) => {
-    let end = (this as any).enableLocalDates? DateTime.local().minus({ day: 1 }): DateTime.utc().minus({day:1})
+    const dateTime = (this as any).props?.enableLocalDates ? DateTime.local():DateTime.utc() ;
+    let end = dateTime.minus({ days: 1 });
     let start: any
     switch (period) {
       case PERIOD_OPTIONS.lastWeek:
-        start = DateTime.local().minus({ weeks: 1 }).startOf('week').minus({ day: 1 });
+        start = dateTime.minus({ weeks: 1 }).startOf('week').minus({ day: 1 });
         end = start.plus({ days: 6 });
         break;
       case PERIOD_OPTIONS.last14Days:
@@ -194,6 +194,8 @@ export default class DateRangePicker extends React.Component {
       canSelectToday:canSelectToday,
       style
     }
+
+    
     // If inputRef is provided from props, use that. Otherwise, use default from class.
     const { inputRef: inputRefProps }: any = this.props
     const inputRef = inputRefProps || (this as any).inputRef
@@ -203,11 +205,11 @@ export default class DateRangePicker extends React.Component {
       let newColor;
       if (color.match(isHex)){
         newColor = hexRgb(color,{format: 'css',alpha:0.2})
-        return newColor
+        return newColor;
       }
       else {
         newColor = color.replace(/[^,]+(?=\))/, 0.2)
-        return newColor
+        return newColor;
       }
     } 
     const lightColor = checkColor(color);
@@ -231,13 +233,16 @@ export default class DateRangePicker extends React.Component {
     }
     `;
 
+    const dateTime = (this as any).props?.enableLocalDates ? DateTime.local():DateTime.utc() ;
     const disabledDays = [
-      (day: any) => canSelectToday ? 
-        day > DateTime.local().plus({days: 1}) : 
-        day >= DateTime.local()
-    ]
+      (day: any) => (this as any).props.canSelectToday ? 
+        day > dateTime.minus({days: 0}):  
+        day >= dateTime
+    ];
     
-
+    // const overlayWrapper = (props:any)=>{
+    //   return (<DateRangeOverlay {...props} enableLocalDates={(this as any).props?.enableLocalDates}></DateRangeOverlay>)
+    // }
 
     // Show the custom calendar
     return (

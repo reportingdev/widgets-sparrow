@@ -24,7 +24,6 @@ const SparrowButton: FC<Props> = ({
   label="Learn more",
   color,
   isDisabled,
-  loadingIconColor,
   ...props
 }) => {
   // set the classes for the button and it's children
@@ -32,25 +31,29 @@ const SparrowButton: FC<Props> = ({
     'Button--Default',
     {
       'Button--Primary':variant === 'primary',
+      'Button--Primary--widget':variant === 'primary',
       'Button--Secondary': variant === 'secondary',
+      'Button--Secondary--widget': variant === 'secondary',
       'Button__Loading--default': loading
     },
     className
   )
 
   const cssStyle = `
-    .Button--Primary {
-      background-color: ${color}
+    .Button--Primary--widget {
+      background: ${color}
     }
-    .Button--Primary.Button__Loading--default {
+    .Button--Primary--widget.Button__Loading--default {
       background: ${color};
       opacity: 0.5;
     }
-    .Button--Primary:hover:enabled {
+    .Button--Primary--widget:hover:enabled {
       background: ${color};
       opacity: 0.9;
     }
-    
+    .Button--Secondary--widget {
+      color: ${color};
+    }
     `
 
   // render the button
@@ -71,7 +74,7 @@ const SparrowButton: FC<Props> = ({
               r='20'
               fill='none'
               strokeWidth='5'
-              style={{ stroke: loadingIconColor }} />
+              style={{ stroke: '#6B7280' }} />
           </svg>
         </div>
       )}

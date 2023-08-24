@@ -283,6 +283,13 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
     overflow: hidden;
   }
+
+  .DayPickerInput-Overlay--right {
+    left: auto !important;
+    right: 0;
+    width: auto;
+    transform: none;
+  }
   
   .DayPickerInput__periodsWrapper {
     padding: 18px 0 24px;

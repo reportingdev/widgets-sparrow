@@ -32,29 +32,29 @@ export default {
         category: "Date Picker Settings",
       },
     },
-    canSelectToday: {
-      descrpition: "Whether or not the end-user can select today's date in the date picker.",
-      table: {
-        category: "Date Picker Settings",
-      },
-    },
-    enableLocalDates: {
-      description: "When toggled true, the datepicker will use the end-user's local timezone rather than the UTC timezone.",
-      table: {
-        category: "Date Picker Settings",
-      }
-    },
+    // canSelectToday: {
+    //   descrpition: "Whether or not the end-user can select today's date in the date picker.",
+    //   table: {
+    //     category: "Date Picker Settings",
+    //   },
+    // },
+    // enableLocalDates: {
+    //   description: "When toggled true, the datepicker will use the end-user's local timezone rather than the UTC timezone.",
+    //   table: {
+    //     category: "Date Picker Settings",
+    //   }
+    // }
   }
 }
 
 
-const Template = (args: any) => <DateRangePicker {...args} />;
+const Template = (args: any) => (<div style={{width:'100%', display: 'flex',justifyContent:'center'}}><div style={{width:200}}><DateRangePicker {...args} /></div></div>);
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
 Primary.args = {
   color: '#866cff',
-  canSelectToday: false,
-  enableLocalDates: false,
+  // canSelectToday: false,
+  // enableLocalDates: true,
 };

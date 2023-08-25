@@ -10,7 +10,7 @@ export default {
   component: Dropdown,
   widgetConfig: {
     data: true,
-    dimension: false,
+    dimension: true,
     fieldLimit: 1,
     changeRate: false,
     action: true,
@@ -43,18 +43,18 @@ export default {
     //     category: 'Dropdown Settings'
     //   }
     // },
-    showLabel: {
-      description: 'whether or not the dropdown should have label',
-      table: {
-        category: 'Label Settings'
-      }
-    },
-    label: {
-      description: 'The label to show above the selector',
-      table: {
-        category: 'Label Settings'
-      }
-    },
+    // showLabel: {
+    //   description: 'whether or not the dropdown should have label',
+    //   table: {
+    //     category: 'Label Settings'
+    //   }
+    // },
+    // label: {
+    //   description: 'The label to show above the selector',
+    //   table: {
+    //     category: 'Label Settings'
+    //   }
+    // },
     // color: {
     //   control: 'color',
     //   description: "the icon color",
@@ -111,8 +111,8 @@ Primary.args = {
   data: defaultOptionData,
   loading: false,
   placeholderText: 'Select...',
-  showLabel:false,
-  label:'Select a platform',
+  //showLabel:false,
+  //label:'Select a platform',
   isSearchable: false,
   isScrollable: false,
   // color:'#866cff',

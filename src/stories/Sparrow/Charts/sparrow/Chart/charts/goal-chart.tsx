@@ -69,17 +69,20 @@ const GoalChart: FC<Props> = ({
       svg.append("clipPath")  // clip is used to manage long label strings
         .attr("id", "clip")
         .append("rect")
-        .attr("x", -width * 0.4)       // half of width*0.8 to center it
+        .attr("x", (-width * 0.8)/2)       // half of width*0.8 to center it
         .attr("y", -height / 2)        // center vertically
         .attr("width", width * 0.8)
         .attr("height", height);
       if (label) {
+        console.log(width)
         svg
           .append('text')
           .attr("clip-path", "url(#clip)")
+          // .attr('text-anchor',"middle")
           .attr('class', `${s['GoalChart__label']} goal-label`)
           .attr('dominant-baseline', 'middle')
           .attr('y', "1.5em") // positioned below the progress label
+          .attr('x', 0)
           .attr('fill', labelColor ?? '#2C304F')
           .attr('style', `font-size: ${labelTextFontSize}px`)
           .text(label)

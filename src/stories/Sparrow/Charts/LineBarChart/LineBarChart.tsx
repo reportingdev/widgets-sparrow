@@ -168,7 +168,7 @@ LineBarChart.propTypes = {
   labelAlignment: PropTypes.string
 };
 
-const chartSampleData = widgetDataGenerator(1, true, false);
+const chartSampleData = widgetDataGenerator(2, true, false);
 
 LineBarChart.defaultProps = {
   data: chartSampleData,

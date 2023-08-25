@@ -38,7 +38,8 @@ type ComparedTo = {
 
 // the widget config object is used to set the rules for how widgets work in our editor
 type WidgetConfig = {
-  data?: boolean;                     // whether or not the widget uses the `data` prop
+  data?: boolean;
+  fieldLimit?: number;                // whether or not the widget uses the `data` prop
   dimension?: boolean;                // whether or not the widget ues the dimension prop in `data`
   changeRate?: boolean;               // whether or not the widget uses the changeRate prop from the passed datasets
   action?: boolean;                   // whether or not the widget uses onChange to get/set dashboard variables 

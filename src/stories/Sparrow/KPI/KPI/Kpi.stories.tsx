@@ -2,6 +2,7 @@ import React from "react";
 import { widgetDataGenerator } from "../../../utils/generators";
 import { ICON_KEYS } from "../../../utils/icons";
 import { KPI } from "./KPI";
+import WidgetWrapper from "../../../../reactflow";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -81,7 +82,7 @@ const containerStyle = {
 }
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args: any) => (<div style={containerStyle}><KPI {...args} /></div>);
+const Template = (args: any) => WidgetWrapper(KPI, args);
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args

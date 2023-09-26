@@ -1,4 +1,11 @@
-import React, { useRef, useLayoutEffect, FC, useState } from 'react'
+import React, {
+  useRef,
+  useLayoutEffect,
+  FC,
+  useState,
+  useCallback,
+  useMemo,
+} from 'react';
 import chroma from 'chroma-js'
 import * as d3 from 'd3'
 
@@ -19,7 +26,7 @@ const GoalChart: FC<Props> = ({
   labelColor,
   isLoading,
 }) => {
-  const colorScale = chroma.scale(stepColors)
+  const colorScale = useCallback(() => chroma.scale(stepColors), [stepColors])
   const lastProgressRef = useRef(0);
   const radius = Math.min(width, height) / 2
   const outerRadius = radius - border
@@ -27,11 +34,12 @@ const GoalChart: FC<Props> = ({
     return parseFloat(num.toFixed(decimalPlaces ?? 2));
   }
   const showValue = !children && !isLoading;
-  const arc = d3
+  const arc = useMemo(() => d3
     .arc()
     .startAngle(0)
     .innerRadius(radius)
-    .outerRadius(outerRadius)
+    .outerRadius(outerRadius), [radius, outerRadius])
+
   const twoPi = Math.PI * 2
   const ref = useRef(null)
   const [backgroundColor, setBackgroundColor] = useState(stepColors[0]);
@@ -174,7 +182,7 @@ const GoalChart: FC<Props> = ({
     }
 
     window.requestAnimationFrame(loop)
-  }, [data, arc, colorScale, twoPi, height, border])
+  }, [data, height, border])
 
   return (
     <div

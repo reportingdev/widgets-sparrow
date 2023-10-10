@@ -23,6 +23,7 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "target": "ES5",
+    "skipLibCheck": true,
     "typeRoots": ["./types", "./node_modules/@types"]
   },
   "include": ["src/**/*", "types/**/*"],

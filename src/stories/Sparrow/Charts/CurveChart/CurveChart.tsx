@@ -31,7 +31,7 @@ export const CurveChart = ({
   }));
 
   // grab each label from the datasets
-  const labels = datasets.map(({label})=>label);
+  const labels = datasets?.map(({label})=>label) ?? [];
 
   const chartData = {
     ...data,

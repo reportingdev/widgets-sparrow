@@ -39,7 +39,7 @@ export const DonutChart = ({
   }));
 
   // grab each label from the datasets
-  const labels = datasets.map(({label})=>label);
+  const labels = datasets?.map(({label})=>label) ?? [];
 
   const chartData = {
     labels,

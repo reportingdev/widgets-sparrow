@@ -28,7 +28,8 @@ export const GoalChart = ({
   showPath
 }: Widget) => {
 
-  const calculatePercentage = (data: WidgetData): number => {
+  const calculatePercentage = (data?: WidgetData): number => {
+    if(!data) {return 0;}
     const { datasets, dimension } = data;
 
     if (!datasets.length || !dimension) return 0;

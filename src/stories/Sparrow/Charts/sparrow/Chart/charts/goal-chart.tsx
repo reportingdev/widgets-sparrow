@@ -3,7 +3,6 @@ import React, {
   useLayoutEffect,
   FC,
   useState,
-  useCallback,
   useMemo,
 } from 'react';
 import chroma from 'chroma-js'
@@ -26,7 +25,7 @@ const GoalChart: FC<Props> = ({
   labelColor,
   isLoading,
 }) => {
-  const colorScale = useCallback(() => chroma.scale(stepColors), [stepColors])
+  const colorScale = chroma.scale(stepColors)
   const lastProgressRef = useRef(0);
   const radius = Math.min(width, height) / 2
   const outerRadius = radius - border

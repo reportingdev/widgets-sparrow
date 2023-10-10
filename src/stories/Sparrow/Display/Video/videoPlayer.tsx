@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from 'react';
 
 interface VideoPlayerProps {
   videoUrl: string;
-  loading: boolean;
+  loading?: boolean;
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl, loading }) => {
+const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl, loading, altText }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl, loading }) => {
           src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=${loading ? "0" : "1"}`} // use autoplay parameter
           style={commonStyles}
           allowFullScreen
-          title="YouTube Video Player"
+          title={altText}
         ></iframe>
         {loading && <div style={{ ...commonStyles, position: 'absolute', top: 0, backgroundColor: 'rgba(255,255,255,0.5)' }}>Loading...</div>}
       </div>
@@ -55,7 +55,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl, loading }) => {
           src={`https://player.vimeo.com/video/${vimeoVideoId}?autoplay=${loading ? "0" : "1"}`} // use autoplay parameter
           style={commonStyles}
           allowFullScreen
-          title="Vimeo Video Player"
+          title={altText}
         ></iframe>
         {loading && <div style={{ ...commonStyles, position: 'absolute', top: 0, backgroundColor: 'rgba(255,255,255,0.5)' }}>Loading...</div>}
       </div>
@@ -66,7 +66,7 @@ const videoType = getVideoType(videoUrl);
 if (videoType) {
   return (
     <div style={{ position: 'relative', ...commonStyles }}>
-      <video controls style={commonStyles} ref={videoRef}>
+      <video controls style={commonStyles} ref={videoRef} title={altText}>
         <source src={videoUrl} type={videoType} />
         Your browser does not support the video tag.
       </video>

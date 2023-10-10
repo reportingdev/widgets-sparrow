@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { DateTime } from 'luxon'
 import classnames from 'classnames'
 import { PERIODS_LIST } from './constants'
-import SparrowButton from '../Button'
+import SparrowButton from '../Button/sparrowButton'
 import './daterangepicker.css'
 
 

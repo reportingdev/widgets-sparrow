@@ -15,7 +15,7 @@ import KPIMetric from './kpiComponent';
  */
 export const KPI = ({ data, loading, labelColor, metricColor, metricFormat, alignment, icon, iconFormat }: Widget) => {
 
-  const kpiObject: Dataset = data.datasets?.[0] ?? { data: [] };
+  const kpiObject: any = data?.datasets?.[0] ?? { data: [] };
   let kpiValue = aggregateData(kpiObject.data, kpiObject?.aggregationType)
   const { changeRate } = kpiObject;
 

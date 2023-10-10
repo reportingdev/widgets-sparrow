@@ -7,7 +7,7 @@ import SparrowDropdown, {
   SingleOptionType,
   OptionTypeArray,
   dropdownDefaultComponents
-} from '.'
+} from './sparrowDropdown'
 import { OptionProps } from 'react-select'
 
 // import images for dropdown
@@ -27,7 +27,8 @@ const optionsWithImages: OptionTypeArray = [
 
 export const Dropdown =({data,placeholderText, isDisabled, loading, showLabel, label, isOptionsWithImages, isSearchable, enableMultiSelect, isScrollable,isPlaceholderInvalidImage, onChange, withCustomElement, color, allSelectedLabel}:Widget)=>{
 
-  const generateDropdownValues = (data:WidgetData) => {
+  const generateDropdownValues = (data?:WidgetData) => {
+    if(!data) {return [];}
     const { datasets,dimension } = data;
   
     if (!datasets || datasets.length === 0) {
@@ -51,11 +52,11 @@ export const Dropdown =({data,placeholderText, isDisabled, loading, showLabel, l
   )
   const handleSingleSelect = (option: SingleOptionType): void => {
     setSelected(option)
-    onChange({selected: option.value});
+    onChange?.({selected: option.value});
   }
   const handleMultiSelect = (options: OptionTypeArray): void => {
     setSelected(options)
-    options.forEach(ele => onChange({selected: ele.value}));
+    options.forEach(ele => onChange?.({selected: ele.value}));
   }
   type SelectOptionProps = OptionProps<SingleOptionType, boolean>
   const CustomOption = (props: SelectOptionProps): React.ReactElement => {

@@ -8,7 +8,7 @@ import VideoPlayer from './videoPlayer';
 export const Video = ({ loading, videoUrl, altText }:Widget) => {
 
   return (
-    <VideoPlayer videoUrl={videoUrl} loading={loading} />
+    <VideoPlayer videoUrl={videoUrl} loading={loading} altText={altText} />
   );
 };
 

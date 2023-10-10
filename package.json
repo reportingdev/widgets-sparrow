@@ -1,9 +1,25 @@
 {
-  "name": "widgets-sparrow",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@reportingdev/widgets-sparrow",
+  "version": "0.0.1",
+  "description": "reporting.dev implementation of Sparrow Chart library.",
+  "keywords": [],
+  "author": "Braden Ericson (@bradenericson)",
+  "license": "No License",
+  "bugs": {
+    "url": "https://github.com/reporting-dev/widgets-sparrow/issues"   
+  },
+  "homepage": "https://github.com/reporting-dev/widget-sparrow#readme",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "types": "dist/export/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "dependencies": {
     "@heroicons/react": "^1.0.6",
+    "@reportingdev/widget-utils": "^0.1.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -28,7 +44,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "prebuild": "node ./scripts/build-exports.js",
+    "prebuild": "tsc",
     "build": "rollup -c",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

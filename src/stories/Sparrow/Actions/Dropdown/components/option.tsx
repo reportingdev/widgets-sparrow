@@ -4,7 +4,7 @@
 // import react libraries
 import React, { FC } from 'react'
 import { components, OptionProps } from 'react-select'
-import { SingleOptionType } from '../index'
+import { SingleOptionType } from '../sparrowDropdown'
 import Image from '../Image'
 
 type SelectOptionProps = OptionProps<SingleOptionType, boolean>

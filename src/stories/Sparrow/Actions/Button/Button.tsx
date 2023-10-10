@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SparrowButton from '.'
+import SparrowButton from './sparrowButton'
 import './button.css'
 
 
 export const Button = ({ loading, onChange, label, actionValue, color, variant, isDisabled, loadingIconColor  }:Widget) => {
 
     const onClick = () => {
-      onChange({
+      onChange?.({
         button: actionValue
       })
     };

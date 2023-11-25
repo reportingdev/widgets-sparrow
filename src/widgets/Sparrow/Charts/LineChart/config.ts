@@ -76,4 +76,5 @@ export const widgetConfig = {
   changeRate: false,
   action: false,
   defaultSize: '4:2',
+  previewImage: 'https://storage.googleapis.com/sm-development-sparrow-api-public-00e31609/logos/line-chart.svg'
 };

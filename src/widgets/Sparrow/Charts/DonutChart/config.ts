@@ -125,4 +125,5 @@ export const widgetConfig = {
   action: false,
   actionFields: {},
   defaultSize: '4:4',
+  previewImage: 'https://storage.googleapis.com/sm-development-sparrow-api-public-00e31609/logos/donut-chart.svg'
 };

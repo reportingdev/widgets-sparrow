@@ -86,4 +86,5 @@ export const widgetConfig ={
   changeRate: false,
   action: false,
   defaultSize: '4:4',
+  previewImage: 'https://storage.googleapis.com/sm-development-sparrow-api-public-00e31609/logos/bell-curve-chart.svg'
 };

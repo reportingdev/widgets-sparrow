@@ -19,7 +19,7 @@
   "module": "dist/index.es.js",
   "dependencies": {
     "@heroicons/react": "^1.0.6",
-    "@reportingdev/widget-utils": "^0.1.1",
+    "@reportingdev/widget-utils": "^0.2.9",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

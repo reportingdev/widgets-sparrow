@@ -1,6 +1,6 @@
 {
   "name": "@reportingdev/widgets-sparrow",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "reporting.dev implementation of Sparrow Chart library.",
   "keywords": [],
   "author": "Braden Ericson (@bradenericson)",

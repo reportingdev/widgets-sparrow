@@ -74,4 +74,5 @@ export const widgetConfig = {
   dimension: true,
   changeRate: false,
   action: false,
+  previewImage: 'https://storage.googleapis.com/sm-development-sparrow-api-public-00e31609/logos/bar-chart.svg'
 }

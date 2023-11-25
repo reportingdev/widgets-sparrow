@@ -33,4 +33,7 @@ export const defaultValues = {
   isBold: true,
 };
 
-export const widgetConfig = {}
+export const widgetConfig = {
+  hideCard: true,
+  previewImage: 'https://storage.googleapis.com/sm-development-sparrow-api-public-00e31609/logos/text.svg'
+}

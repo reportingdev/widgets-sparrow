@@ -78,5 +78,6 @@ export const widgetConfig = {
     "Chart Tooltip": ['showTooltip', 'formatTooltipTitle'],
     "Chart Legend": ['showLegend', 'labelPosition', 'labelAlignment'],
     "Chart Animation": ['animationDuration', 'animationStepDelay'],
-  }
+  },
+  previewImage: 'https://storage.googleapis.com/sm-development-sparrow-api-public-00e31609/logos/area-chart.svg' 
 };

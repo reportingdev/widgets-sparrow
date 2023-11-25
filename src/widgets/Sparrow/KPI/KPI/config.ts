@@ -79,4 +79,6 @@ export const widgetConfig = {
   action: false,
   actionFields: {},
   defaultSize: "1:2",
+  previewImage: 'https://storage.googleapis.com/sm-development-sparrow-api-public-00e31609/logos/kpi.svg',
+  
 };

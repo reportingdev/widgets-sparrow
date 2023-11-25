@@ -56,4 +56,6 @@ export const widgetConfig = {
       type: 'string'
     },
   },
+  hideCard: true,
+  previewImage: 'https://storage.googleapis.com/sm-development-sparrow-api-public-00e31609/logos/button.svg'
 }

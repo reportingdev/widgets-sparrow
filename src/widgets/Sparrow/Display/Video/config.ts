@@ -20,4 +20,7 @@ export const defaultValues = {
   altText: "Where's the rum?"
 };
 
-export const widgetConfig = {}
+export const widgetConfig = {
+  previewImage: 'https://storage.googleapis.com/sm-development-sparrow-api-public-00e31609/logos/video.svg',
+  hideCard: true,
+}

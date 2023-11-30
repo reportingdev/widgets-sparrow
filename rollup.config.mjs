@@ -24,6 +24,8 @@ export default {
   plugins: [
     postcss({
       extensions: ['.css'],
+      inject: false,  // Do not inject styles into JavaScript
+      extract: true,  // Extract styles to a separate CSS file
     }),
     svg(),
     resolve({
